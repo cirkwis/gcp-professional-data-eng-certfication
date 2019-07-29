@@ -71,16 +71,84 @@
 - NoSQL/non-relational database
     - Flexible structure/relationship between objects
 
-# Use Datastore for...
+### Use Datastore for...
 - Applications that need highly available structured data, at scale
 - Product catalogs, real-time inventory
 - User profiles - mobile apps
 - Game save states
 - ACID transactions - e.g. transferring funds between accounts
 
-## Do not use Datastore for...
+### Do not use Datastore for...
 - Analytics (full SQL semantics) => Use BigQuery/Cloud Spanner
 - Extreme scale (10M+ read/writes per second) => Use Bigtable
 - Don't ned ACID transactions/data not highly structured => Bigtable
 - Lift and shift (existing MySQL) => Use Cloud SQL
 - Near zero latency (sub-10ms) => Use in-memory database (Redis)
+
+### Other important facts
+- Single Datastore per project
+- Multi-regional for wide access, single region for lower latency for single location
+- Datastore is a transactional database 
+- Bigtable is an analytic database
+- IAM roles:
+  - Primitive and predefined 
+  - Owner, user, viewer, import/export admin, index admin
+
+![Other important facts](./image/3-3.png "Other important facts")
+
+## Data organization
+- Entities grouped by kind (category)
+- Entities can be hierarchical (nested)
+- Each entity has one or more properties
+- Properties have a value assigned
+
+| Concept  |      Relational Database      |  Datastore |
+|:----------|:-------------|:------|
+| Category of object |  Table | Kind |
+| Single Object |    Row   |   Entity |
+| Individual data for an object | Column |   Property |
+| Unique ID for an object | Primary key |   Key |
+
+## Queries and Indexing
+
+### Query
+
+- Retrieve entity from Datastore that meets a set of conditions
+- Query includes
+  - Entity kind
+  - Filters 
+  - Sort order
+- Query methods
+  - Programmatics
+  - Web console
+  - Google Query Language (GQL)
+
+### Indexing
+- Queries gets results from indexes 
+  - Contain entity keys specified by index properties 
+  - Updated to reflect changes
+  - Correct query results available with no additional computation needed
+- Index types
+  - Built-in - default option: allows single property queries
+  - Composite - specified with index configuration file (index.yaml)
+  ```shell
+  gcloud datastore create-indexes index.yaml
+  ```
+  - Example index.yaml
+  ```shell
+  indexes:
+  - kind: Task
+    properties: 
+    - name: tags
+    - name: created
+  - kind: Associated
+    properties: 
+    - name: collaborators
+    - name: created
+  ```
+- Danger - Exploding Indexes!
+  - Default - create entry for every possible combination of property values
+  - Results in higher storage and degraded performance 
+  - Solutions: 
+    - Use custom index.yaml file to narrow index scope
+    - Do not index properties that don't need indexing
