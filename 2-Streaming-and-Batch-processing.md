@@ -83,3 +83,24 @@
   - Understand description between database types 
   - Know which databases version matches with description 
     - Example: "need database with throughput, ACID compliance not necessary, choose three possible options"
+
+## Monitoring Unmanaged Databases
+
+### Logging and Monitoring in unmanaged (GCE) databases 
+- Examples: Cassandra, MySQL, MariaDB, MongoDB, Hbase
+- Hosted on Compute Engine instances
+
+### Built in vs. additional monitoring
+- Built in = no additional configuration needed: No application-level data
+- Stackdriver Logging 
+  - Audit logs: "Who created this instance?"
+  - Does not include application logs
+- Stackdriver Monitoring
+  - Instance performance metrics: Disk I/O, CPU usage, network connections
+  - No application performance metrics 
+
+### What if we want application data?
+- Stackdriver Agents! - install and configure in instance
+- Logging agent vs Monitoring agent: configure with **fluentd**
+- Monitoring agent = Stackdriver Monitoring = application performance/metrics/alerts
+  - May require plugin configuration
