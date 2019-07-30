@@ -152,3 +152,23 @@
   - Solutions: 
     - Use custom index.yaml file to narrow index scope
     - Do not index properties that don't need indexing
+
+## Data Consistency
+
+### What is data consistency in queries?
+- "How up to date are these results?"
+- "Does the order matter?"
+- Strongly consitent = Parallel processes see changes in same order
+  - Query is guaranteed up to date, but may take longer to complete
+- Eventually consistent = Parallel process can see change out of order, will eventually see accurate end state
+  - Faster query, but may sometimes return stale results
+- Performance vs. accurary
+- Ancestor query/key-value operation 
+- Global queries/projections = eventual
+
+### Use cases 
+- Strong - financial transaction
+  - Make deposit -- check balance
+- Eventual - census population
+  - Order not as important, as long a you get eventual result
+
