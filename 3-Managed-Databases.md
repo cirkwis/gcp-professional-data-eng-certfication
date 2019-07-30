@@ -172,3 +172,31 @@
 - Eventual - census population
   - Order not as important, as long a you get eventual result
 
+# Cloud BigTable
+
+## Bigtable Overview
+### What is Cloud Bigtable? 
+- High performance, massively scalable NoSQL database
+- Ideal for large analytic workloads
+
+### History of Bigtable
+- Considered one of the originators of NoSQL industry
+- Developed by Google in 2004
+  - Existing database solutions were too slow 
+  - Needed realtime access to petabytes of data
+- Powers Gmail, Youtube, Google Maps and others
+
+### What is it used for?
+- High throughput analytics 
+- Huge datasets 
+
+### Use cases
+- Financial data - stock prices 
+- IoT data
+- Marketing data - purchase histories
+  
+### Access Control
+- Project wide or instance level 
+- Read/Write/Manage
+
+![Cloud Bigtable infrastructure](./image/3-5.png "Cloud Bigtable infrastructure")
