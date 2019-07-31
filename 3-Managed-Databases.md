@@ -102,12 +102,12 @@
 - Each entity has one or more properties
 - Properties have a value assigned
 
-| Concept  |      Relational Database      |  Datastore |
-|:----------|:-------------|:------|
-| Category of object |  Table | Kind |
-| Single Object |    Row   |   Entity |
-| Individual data for an object | Column |   Property |
-| Unique ID for an object | Primary key |   Key |
+| Concept                       | Relational Database | Datastore |
+| :---------------------------- | :------------------ | :-------- |
+| Category of object            | Table               | Kind      |
+| Single Object                 | Row                 | Entity    |
+| Individual data for an object | Column              | Property  |
+| Unique ID for an object       | Primary key         | Key       |
 
 ## Queries and Indexing
 
@@ -200,3 +200,149 @@
 - Read/Write/Manage
 
 ![Cloud Bigtable infrastructure](./image/3-5.png "Cloud Bigtable infrastructure")
+
+## Instance Configuration
+
+### Instance basics 
+- Not no-ops 
+  - Must configure nodes
+- Entire Bigtable project call "instance"
+  - Al nodes and clusters 
+- Nodes grouped into clusters
+  - 1 or more clusters per instance 
+- Auto-scaling storage 
+- Instance types:
+  - Development - low cost, single node
+    - No replication
+  - Production - 3+ per cluster 
+    - Replication available, throughput guarantee
+
+### Replication and Changes
+- Synchronize data between clusters 
+  - One additional cluster, total 
+  - (Beta) available cross-region
+- Resizing
+  - Add and remove nodes and clusters with no downtime
+- Changing disk type (e.g. HDD to SSD) requires new instance
+
+### Interacting with Bigtable 
+- Command line - cbt tool or HBase shell: cbt tool is simpler and preferred option
+
+1. Install the cbt command Google SDK: 
+   - **gcloud components update**
+   - **gcloud components install cbt**
+2. Configure cbt to use your project and instance via .cbtrc file: 
+   - **echo -e "project = [PROJECT_ID]\ninstance = [INSTANCE_ID]" > ~/.cbtrc**
+3. Create table
+   - **cbt createtable my-table**
+4. List the table 
+   - **cbt ls**
+5. Add a column family
+   - **cbt createfamily my-table cf1**
+6. List column family
+   - **cbt ls my-table**
+7. Add value to row1, using column family cf1 and column qualifier c1
+   - **cbt set my-table r1 cf1:c1=test-value**
+8. Use the cbt read command to read the data you added to the table
+   - **cbt read my-table**
+9. Delete the table (if not deleting instance):
+   - **cbt deletetable my-table**
+
+## Instance Organization
+- Data organization
+  - One big table (hence then name Bigatat)
+  - Table can be thousands of columns/billions of rows 
+  - Table is shared acorss tablets
+- Table components 
+  - Row key: First column
+  - Columns grouped into columns families 
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-0pky"></th>
+    <th class="tg-c3ow" colspan="2">Column-Family-1</th>
+    <th class="tg-c3ow" colspan="2">Column-Family-2</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Row key</td>
+    <td class="tg-0pky">Column-Qualifier-1</td>
+    <td class="tg-0pky">Column-Qualifier-2</td>
+    <td class="tg-0pky">Column-Qualifier-1</td>
+    <td class="tg-0pky">Column-Qualifier-2</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">r1</td>
+    <td class="tg-0pky">r1, cf1:cq1:[value]</td>
+    <td class="tg-0pky">r1, cf1:cq1:[value]</td>
+    <td class="tg-0pky">r1, cf2:cq1:[value]</td>
+    <td class="tg-0pky">r1, cf2:cq2:[value]</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">r2</td>
+    <td class="tg-0pky">r2, cf1:cq1:[value]</td>
+    <td class="tg-0pky">r2, cf1:cq2:[value]</td>
+    <td class="tg-0pky">r2, cf2:cq1:[value]</td>
+    <td class="tg-0pky">r2, cf2:cq2:[value]</td>
+  </tr>
+</table>
+
+- Indexing and Queries 
+  - Only the row key is indexed
+  - Schema design is necessary for efficient queries!
+  - Field promotion - move fields from column data to row key
+
+## Schem Design 
+
+### Schema Design
+- Per table - Row key is only indexed item
+- Keep all entity information in a single row
+- Related entities should be in adjacent rows 
+  - More efficient reads
+- Tables are sparse - empty columns take no space
+
+### Schema efficiency 
+- Well defined row keys = less work
+  - Multiple values in row key
+- Row key (or prefix) should be sufficient for search
+- Goal = spread load over multiple nodes
+  - All on one node = 'hotspotting'
+#### Row key best practices 
+- Good row keys = distributed load
+  - Reverse domain names (com.linuxacademy.suport)
+  - String identifiers (mattu)
+  - Time stamps (reverse, NOT at front/or only identifer)
+- Poor row keys = hotspotting
+  - Domaine names (support.linuxacademy.com)
+  - Sequential ID's
+  - Timestamps alone/at front
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-c3ow">Row Key</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">memusage-user-timestamp</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">20-mattu-201805082048</td>
+  </tr>
+</table>
+
+### Table design - Time series data
+- For time series data, use **tall and narrow** table (one event per row)
+  - Easier to run queries against data
+
