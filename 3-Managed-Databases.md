@@ -346,3 +346,278 @@
 - For time series data, use **tall and narrow** table (one event per row)
   - Easier to run queries against data
 
+# Cloud Spanner
+
+## Cloud Spanner Overview
+- What is Cloud Spanner?
+  - Fully managed, highly scalable/available, relational database
+  - Similar architecture to Bigtable
+  - "NewSQL"
+
+- What is it used for
+  - Mission critical, relational databases that need strong transactional consistency (ACID compliance)
+  - Wide scale availability 
+  - Higher workloads than Cloud SQL can support
+  - Standard SQL format (ANSI 2011)
+
+- Horizontal vs. vertical scaling
+  - Vertical = more compute on single instance (CPU/RAM)
+  - Horizontal = more instances (nodes) sharing the load
+
+- Compared to Cloud SQL 
+  - Cloud SQL = Cloud incarnation of on-premise MySQL database
+  - Spanner = designed form the ground up for the cloud
+  - Spanner is not a "drop-in" replacement for MySQL
+    - Not MySQL/PostgreSQL compatible
+    - Work required to migrate
+    - However, when making transition, don't need to choose between consistency and scalability
+
+- Transactional Consistency vs. Scalability
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-7btt{font-weight:bold;border-color:inherit;text-align:center;vertical-align:top}
+.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-7btt">Database </th>
+    <th class="tg-7btt">Cloud Spanner</th>
+    <th class="tg-7btt">Transactional Relational</th>
+    <th class="tg-7btt">Transactional Non-relational</th>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Schema</td>
+    <td class="tg-0pky">Yes</td>
+    <td class="tg-0pky">Yes</td>
+    <td class="tg-0pky">No</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">SQL</td>
+    <td class="tg-0pky">Yes</td>
+    <td class="tg-0pky">Yes</td>
+    <td class="tg-0pky">No</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Consistency</td>
+    <td class="tg-0pky">Strong</td>
+    <td class="tg-0pky">Strong</td>
+    <td class="tg-0pky">Eventual</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Availability</td>
+    <td class="tg-0pky">High</td>
+    <td class="tg-0pky">Failover</td>
+    <td class="tg-0pky">High</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Scalability</td>
+    <td class="tg-0pky">Horizontal</td>
+    <td class="tg-0pky">Vertical</td>
+    <td class="tg-0pky">Horizontal</td>
+  </tr>
+  <tr>
+    <td class="tg-0pky">Replication</td>
+    <td class="tg-0pky">Automatic</td>
+    <td class="tg-0pky">Configurable</td>
+    <td class="tg-0pky">Configurable</td>
+  </tr>
+</table>
+
+![Cloud Bigtable architecture](./image/3-6.png "Cloud Bigtable architecture")
+
+### Identity and Access Management (IAM)
+- Project, Instance or Database level
+- roles/spanner.____
+- Admin - Full access to all Spanner resources
+- Database admin - Create/edit/delete databases, grant access to databases
+- Database Reader - read/execute database/schema
+- Viewer - view instances and databases 
+  - Cannot modifiy or read from database. 
+
+## Data Organization and Schema
+### Schema
+- RDBMS = tables
+- Supports SQL joins, queries, etc
+- Same SQL dialect as BigQuery
+- Tables are handled differently: 
+  - Parent/child tables
+  - Interleave Data Layout
+
+#### Typical Relational Database
+Two sets of related data = Two tables 
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-w747{background-color:#dae8fc;text-align:left;vertical-align:top}
+.tg .tg-6dj5{font-weight:bold;background-color:#ffcb2f;border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+.tg .tg-zci2{font-weight:bold;background-color:#dae8fc;text-align:left;vertical-align:top}
+.tg .tg-oy90{background-color:#ffcb2f;border-color:#000000;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-6dj5">SingerID</th>
+    <th class="tg-6dj5">SingerName</th>
+    <th class="tg-0lax"></th>
+    <th class="tg-zci2">SingerID</th>
+    <th class="tg-zci2">AlbumID</th>
+    <th class="tg-zci2">AlbumName</th>
+  </tr>
+  <tr>
+    <td class="tg-oy90">1</td>
+    <td class="tg-oy90">Beatles</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-w747">1</td>
+    <td class="tg-w747">1</td>
+    <td class="tg-w747">Help!</td>
+  </tr>
+  <tr>
+    <td class="tg-oy90">2</td>
+    <td class="tg-oy90">U2</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-w747">1</td>
+    <td class="tg-w747">2</td>
+    <td class="tg-w747">Abbey Road</td>
+  </tr>
+  <tr>
+    <td class="tg-oy90">3</td>
+    <td class="tg-oy90">Pink Floyd</td>
+    <td class="tg-0lax"></td>
+    <td class="tg-w747">3</td>
+    <td class="tg-w747">1</td>
+    <td class="tg-w747">The Wall</td>
+  </tr>
+</table>
+
+#### Spanner
+Two sets of related data = Interleave tables
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-hrrh{background-color:#ffffff;color:#333333;border-color:#000000;text-align:left;vertical-align:top}
+.tg .tg-2qwx{background-color:#ffffff;color:#333333;border-color:#000000;text-align:center;vertical-align:top}
+.tg .tg-7euo{background-color:#ffffff;color:#333333;text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-2qwx">Singers(1)</th>
+    <th class="tg-2qwx">"Marc"</th>
+    <th class="tg-hrrh">"Richards"</th>
+    <th class="tg-hrrh">&lt;Bytes&gt;</th>
+    <th class="tg-hrrh"></th>
+    <th class="tg-hrrh"></th>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Albums(1, 1)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"Total Junk"</td>
+    <td class="tg-hrrh"></td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Albums(1, 2)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"Go, Go, Go"</td>
+    <td class="tg-hrrh"></td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Songs(1, 2, 1)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"42"</td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Songs(1, 2, 1)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"Nothing is the same"</td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Singers(2)</td>
+    <td class="tg-hrrh">"Catalina"</td>
+    <td class="tg-hrrh">"Smith"</td>
+    <td class="tg-hrrh">&lt;Bytes&gt;</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Albums(2, 1)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"Green"</td>
+    <td class="tg-hrrh"></td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Songs(2, 1, 1)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"Let's Get Back Together"</td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Songs(2, 1, 2)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"Starting Again"</td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Songs(2, 1, 3)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"I Knew You Were Magic"</td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Albums(2, 2)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">"Forever Hold Your Peace"</td>
+    <td class="tg-hrrh"></td>
+  </tr>
+  <tr>
+    <td class="tg-hrrh">Songs(2, 2, 1)</td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh"></td>
+    <td class="tg-hrrh">null</td>
+  </tr>
+  <tr>
+    <td class="tg-7euo">Songs(2, 2, 2)</td>
+    <td class="tg-7euo"></td>
+    <td class="tg-7euo"></td>
+    <td class="tg-7euo"></td>
+    <td class="tg-7euo"></td>
+    <td class="tg-7euo">"Hello"</td>
+  </tr>
+</table>
+
+### Primary keys and Schema
+- How to tell which child tables to store with which parent tables 
+- Usually a natural fit
+  - 'Customer ID'
+  - 'Invoice ID'
+- Avoid hotspotting
+  - No sequential numbers
+  - No timestamps (also sequential)
+    - Use descending order if timestamps required
