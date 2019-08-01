@@ -172,6 +172,12 @@
 - Eventual - census population
   - Order not as important, as long a you get eventual result
 
+![Strong vs eventual consitency](./image/3-4.jpg "Strong vs eventual consitency")
+
+Read more: 
+- [Balancing Strong and Eventual Consistency with Cloud Datastore](https://cloud.google.com/datastore/docs/articles/balancing-strong-and-eventual-consistency-with-google-cloud-datastore/)
+- [Eventual vs Strong Consistency in Distributed Databases](https://hackernoon.com/eventual-vs-strong-consistency-in-distributed-databases-282fdad37cf7)
+
 # Cloud BigTable
 
 ## Bigtable Overview
