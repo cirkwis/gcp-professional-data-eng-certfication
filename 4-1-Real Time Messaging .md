@@ -35,4 +35,60 @@ We are now going to take a detailed look at what exactly Pub/Sub does, how the p
 
  ![Tight vs loosely coupled systems](./image/4-2.jpg "Tight vs loosely coupled systems")
 
- 
+### How it works - terminology?
+
+  ![How it works - terminology?](./image/4-3.jpg "How it works - terminology?")
+
+### Push and Pull
+- Pub/Sub can either **push** messages to subcribers, or subscribers can **pull** messages from Pub/Sub;
+- Push = lower latency, more real-time
+- Push subcribers must be Webhook endpoints that accept POST over HTTPS
+- Pull ideal for large volumne of messages - batch delivery
+
+### IAM
+- Control access at project, topic, or subscription level
+- Admin, Editor, Publisher, Subscriber
+- Service accounts are best practice
+
+### Pricing
+- Data volumne used per month (per GB)
+
+<style type="text/css">
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
+.tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
+</style>
+<table class="tg">
+  <tr>
+    <th class="tg-amwm">Monthly data</th>
+    <th class="tg-amwm">Price Per GB</th>
+  </tr>
+  <tr>
+    <td class="tg-0lax">First 10 GB</td>
+    <td class="tg-0lax">$0.00</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Next 50 TB</td>
+    <td class="tg-0lax">$0.06</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Next 100 TB</td>
+    <td class="tg-0lax">$0.05</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">Beyond 150 TB</td>
+    <td class="tg-0lax">$0.04</td>
+  </tr>
+</table>
+
+### Out of order messaging
+- Messages may arrive from multiple sources out of order
+- Pub/Sub does not care about message ordering
+- Dataflow is where out of order messages are processed/resolved
+- Can add message attributes to help with ordering
+
+Streaming data ingest - GCP 
+
+![Streaming data ingest](./image/4-4.jpg "Streaming data ingest")
