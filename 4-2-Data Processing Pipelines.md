@@ -142,3 +142,41 @@ Pcollection<LaneInfo> currentConditions = p
   - Allow late-arriving data in allowed time window to re-aggregate previously submitted results
   - Timestamps, element count, combinations of both
 
+## Additional Best Practices 
+### Handling Pipeline Errors 
+- If you do not have a mechanism in place to handle input data errors in your pipeline, the job can fail. How can we account for this?
+- Gracefully catch errors
+  - Create separate output
+    - **Try-catch** block handles errors
+    - Output errors to new **PCollection** - Send to 'collector' for later analysis (PubSub is a good target)
+    - Think of it as 'recycling' the 'bad' data
+- Technique is also valid for troubleshooting missing messages
+  - Scenario: Streaming pipeline missing some messages
+  - Solution: Run a batch of streaming data, check output
+    - Create additional output to capture and process errors data. 
+
+![Handling Pipeline Errors ](./image/4-2-6.png "Handling Pipeline Errors ")
+
+### Know your window types
+- Global, Fixed, Sliding and Session
+- Global - default single window for entire pipeline
+- Fixed time - Every (x) period of time
+  - Every 5 seconds, 10 minutes, etc
+  ![Fixed time](./image/4-2-7.png "Fixed time")
+- Sliding time - Overlapping time windows
+  ![Sliding time](./image/4-2-8.png "Sliding time")
+- Session - Within certain time of certain elements
+  - Example: Time since last user/mouvse activity
+  ![Session](./image/4-2-9.png "Session")
+
+### Updating DataFlow Pipelines
+- Scenario: Update streaming Dataflow pipeline with new code
+  - New code = new pipeline not compatible with current version
+  - Need data to 'switch over' to new job/pipeline without losing any data in switch over
+- Solution: Update job
+  - Create new job with same name/new jobId
+- Compability between old/new jobs
+  - Map old to new job transforms with **transform mapping**
+    - "Bridge" between old and new code base
+  - After compability check - buffered data transferred to new job, using transform mapping to translate changes
+
