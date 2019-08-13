@@ -33,3 +33,9 @@ Simple definition: Take big data, distribute it to many workers (map), combine r
 - **Worker** - Assigned to service accounts: Read/write GCS, write to Cloud Logging
 
 ![Dataflow vs Dataproc? Beam vs Hadoop/Spark?](./image/4-2-4.png "Dataflow vs Dataproc? Beam vs Hadoop/Spark?")
+
+# Configure Dataproc Cluster and Submit Job
+## Create cluster
+- gcloud dataproc cluster create [cluster_name] --zone [zone_name]
+- Configure master node, worker nodes
+  - Master contains YARN resource manager
