@@ -39,3 +39,18 @@ Simple definition: Take big data, distribute it to many workers (map), combine r
 - gcloud dataproc cluster create [cluster_name] --zone [zone_name]
 - Configure master node, worker nodes
   - Master contains YARN resource manager
+- Example of creating a Dataproc Cluster via command line: 
+```shell
+gcloud dataproc clusters create cluster-1 \
+--subnet default \
+--zone us-central1-b \
+--master-machine-type n1-standard-1 \
+--master-boot-disk-size 500 \
+--num-workers 2 \
+--workers-machine-type n1-standard-1 \
+--worker-boot-disk-size 500 \
+--project pw-data-engineer \
+--initialization-actions 'gs://dataproc-initialization-actions/kafka/kafka.sh'
+```
+- Google-provided Dataproc initialization scripts: https://console.cloud.google.com/storage/browser/dataproc-initialization-actions/ 
+- Reference for example job submission: https://cloud.google.com/dataproc/docs/quickstarts/quickstart-console
