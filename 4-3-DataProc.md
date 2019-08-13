@@ -54,3 +54,18 @@ gcloud dataproc clusters create cluster-1 \
 ```
 - Google-provided Dataproc initialization scripts: https://console.cloud.google.com/storage/browser/dataproc-initialization-actions/ 
 - Reference for example job submission: https://cloud.google.com/dataproc/docs/quickstarts/quickstart-console
+
+## Updating clusters 
+- Can only change # workers/pre-emptible VM's/labels/toggle gracfull decommission
+- Automatically reshards data for you
+
+### Pre-emptible VM"s on Dataproc
+- Excellent low cost worker nodes 
+- Dataproc manages entire leavejoin process
+  - No need to configure startup/shutdown scripts 
+  - Just add PVM's... and that's it
+- No assigned disks for HDFS (only disk for caching)
+- Want a mix of standard + PVM worker nodes
+  
+## Access your cluster
+- SSH into 
