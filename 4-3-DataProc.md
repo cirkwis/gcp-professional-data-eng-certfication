@@ -90,3 +90,50 @@ gcloud dataproc clusters create cluster-1 \
   gcloud compute ssh master-host-name --project=project-id --zone master-host-zone -- -4 -N -L port1:master-host-name:port2
   ```
   - Use Web Preview to choose port (8088/9870).
+
+## Migrating and Optimizing for Google Cloud
+
+### What are we moving/optimizing?
+- Data (from HDFS)
+- Jobs (pointing to Google Cloud locations)
+- Treating clusters as ephemeral (temporary) rather than permanent entities
+  ![What are we moving/optimizing?](./image/4-3-4.png "What are we moving/optimizing?")
+  
+### Migration best practices
+- Move data first (generally Cloud Storage buckets)
+  - Possible exceptions
+    - Apache HBase data to Bigtable
+    - Apache Impala to BigQuery
+    - Can still choose to move to GCS if Bigtable/BQ features not needed
+- Small scale experimentation (proof of concept)
+  - Use a subset of data to test
+- Think in terms of ephemeral clusters
+- Use GCP tools to optimize and save costs
+
+### Optimize for the cloud ("Lift and Leverage")
+- Separate storage and compute (cluster)
+  - save on costs: no need to keep cluster to keep/access data
+  - Simplify workloads 
+    - No shaping workloads to fit hardware
+    - Simplify storage capacity 
+  - HDFS -> Google Cloud Storage
+  - Hive -> BigQuery
+  - HBase -> Bigtable
+![Optimize for the cloud](./image/4-3-3.png "Optimize for the cloud")
+
+### Converting from HDFS to Google Cloud Storage
+1. Copy data to GCS
+   - Install connector or copy manually
+2. Update file prefix in scripts
+   - From hdfs:// to gs://
+3. Use Dataproc, and run against/output to GCS
+
+## Best practices for Cluster Performance
+### Dataproc performance optimization (GCP-specific)
+- Keep your data close to your cluster
+  - Place dataproc cluster in the same region as storage bucket
+- Larger persistent disk = better performance
+  - Also, consider using SSD over HDD, though at sightly higher cost
+- Allocate more VM's
+  - Use preemptible VM's to save on costs
+  - More VM's will cost more than larger disks if more disk throughput is needed
