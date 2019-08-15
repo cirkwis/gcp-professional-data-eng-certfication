@@ -78,3 +78,15 @@ gcloud dataproc clusters create cluster-1 \
   ```shell
   gcloud compute ssh [master-host-name] --project=[project-id] --zone=[master-host-zone] -- -D 1080 -N
   ```
+- Open new terminal window and launch the web browser with parameters (varies by OS/browser):
+  ```shell
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --proxy-server="socks5://localhost:1080" --host-resolver-rules="MAP * 0.0.0.0 , EXCLUDE localhost" --user-data-dir=/tmp/cluster1-m
+  ```
+  - Browse to http://[master]:port
+    - 8088 - Hadoop
+    - 9870 - HDFS
+- Using Cloud Shell (must use for each port)
+  ```shell
+  gcloud compute ssh master-host-name --project=project-id --zone master-host-zone -- -4 -N -L port1:master-host-name:port2
+  ```
+  - Use Web Preview to choose port (8088/9870).
