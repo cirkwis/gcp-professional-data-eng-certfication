@@ -68,4 +68,13 @@ gcloud dataproc clusters create cluster-1 \
 - Want a mix of standard + PVM worker nodes
   
 ## Access your cluster
-- SSH into 
+- SSH into master - same as any computeur engine instance
+- gcloud compute ssh [master-node-name]
+### Access via web - 2 options
+- Open firewall ports to your network (8088, 9870)
+- Use SOCKS proxy - does not expose firewall ports
+#### SOCKS proxy configuration
+- SSH to master to enable port forwarding
+  ```shell
+  gcloud compute ssh [master-host-name] --project=[project-id] --zone=[master-host-zone] -- -D 1080 -N
+  ```
