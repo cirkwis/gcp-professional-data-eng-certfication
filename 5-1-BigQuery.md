@@ -109,3 +109,53 @@
 - Combine SQL queries with programming logic
 - Allow much more complex operations (loops, complex, conditionals)
 - Web UI only usable with Legacy SQL
+
+## Load and Export Data
+
+### Loading and reading sources
+ ![Loading and reading sources](./image/5-1-4.jpg "Loading and reading sources")
+- Data formats
+  - Load: CSV, JSON (Newline delimited), Avro - best for compressed files, parquet, Datastore backups
+  - Read: CSV, JSON (Newline delimited), Avro, parquet
+- Why use external sources?
+  - Load and clean data in one pass from external, then write to BigQuery
+  - Small amount of frequently changing data to join to other tables
+- Loading data with command line
+  - **bq --location=[LOCATION] load --source_format=[FORMAT] [DATASET].[TABLE] [PATH_TO_SOURCE] [SCHEMA]**
+  - Can load multiple files with command line (not WebUI)
+  ```SQL
+  bq load names.baby_names gs://(YOUR_BUCKET)/names/yob*.txt Name:STRING,Gender:STRING,Number:INTEGER
+  ```
+  - Load multiple files with command line to partitioned tables
+    - Manual partition tables in BigQuery - Load multiple files to multiple tables: https://medium.com/bluekiri/manual-partition-tables-in-bigquery-375dfc5743 
+    ```Shell
+    bq --location=<LOCATION> load --skip_leading_rows 1 --source_format=CSV <DataSet>.<BQTable>_<State> $FileName state:STRING,gender:STRING,year:INTEGER,name:STRING,number:INTEGER
+    ```
+    - Load multiple files into single non-partitioned table
+    ```SQL
+    bq load names.baby_names gs://(YOUR_BUCKET)/names/yob*.txt Name:STRING,Gender:STRING,Number:INTEGER
+    ```
+    - Load multiple files into single partitioned table 
+
+### Connecting to/from other Google Cloud services
+- Dataproc - Use Bigquery connector (installed by default), job uses Cloud Storage for staging
+![Connecting to/from other Google Cloud services](./image/5-1-5.jpg "Connecting to/from other Google Cloud services")
+
+### Exporting tables
+- Can only export to Cloud Storage
+- Can copy table to another BigQuery dataset
+- Export formats: CSV, JSON, Avro
+- Can export multiple tables with command line
+- Can only export up to 1GB per file, but can split into multiple files with wildcards
+- Command line
+  - **bq extract 'projectid:dataset.table' gs://bucket_name/folder/object_name**
+  - Can drop 'project' if exporting from same project
+  - Default is CSV, specify other format with --destination_format
+    - Ex: --destination_format=NEWLINE_DELIMITED_JSON
+
+### BigQuery Transfer service
+- Import data to BigQuery from other Google Advertising SaaS applications
+- Google AdWords
+- DoubleClick
+- Youtube reports
+
