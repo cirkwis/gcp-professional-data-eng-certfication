@@ -1,3 +1,32 @@
+# Exam overview
+The exam consists of 50 questions that must be answered in 2 hours. The content including: 
+- Storage (20%)
+- Big Data Processing (35%)
+- Machine Learning (18%)
+- Case study (15%)
+- Others (Hadoop and security about 12%)
+
+All the questions are scenario simulations where you have to choose which option would be the best to deal the situation. 
+
+# Big Data Ecosystem
+This section is particularly focusing on Apache Pig, Hive, Spark, Hadoop and Beam: 
+- Hadoop:
+  - Open soure MapReduce framework
+  - The underlying technology for **Dataproc**
+- HDFS: Hadoop File System
+- Pig: 
+  - Scripting language that compiles into MapReduce jobs
+  - Procedural Data Flow Language: Pig Latin
+  - Less developement effort & code efficiency 
+  - does not have any notion for partitions
+  - supports **Avro**
+- Hive
+  - Data warehousing system and SQL-like query language
+- Spark:
+  - fast, interactive, general-purpose framework for SQL, streaming, machine learning, ...
+  - solves similar problems as Hadoop MR but with a fast in-memory approach
+- Sqoop imports data from a relational DB system or a mainframe into HDFS
+- Running 
 # Streaming and Batch data
 
 ## Streaming (or real-time) data

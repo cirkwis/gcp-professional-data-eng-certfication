@@ -159,3 +159,92 @@
 - DoubleClick
 - Youtube reports
 
+## Optimize for Performance and Costs
+
+### Performance and costs are complementary
+- Less work = faster query = less costs
+- What is 'work'?
+  - I/O - how many bytes read?
+  - Shuffle - how much passed to next stage?
+  - How many bytes written?
+  - CPU work in functions
+
+### General best practices 
+- Avoid using SELECT *
+- Denormalize data when possible
+  - Grouping data into single table 
+  - Often with nested/repeated data
+  - Good for read performance, not for write (transactional) performance
+- Filter early and big with WHERE clause
+- Do biggest joins first, and filter pre-JOIN
+- LIMIT does not affect cost
+- Partition data by date
+  - Partition by ingest time
+  - Partition by specified data columns
+- Monitoring Query performance
+
+## BigQuery Logging and Monitoring
+### Differences between Stackdriver Monitoring/Stackdriver Logging
+- Monitoring = performance/resources 
+- Logging = who is doing what (History of actions)
+
+### Monitoring BigQuery performance/resources
+- Monitoring = Metrics, Performance, Resource capacity/usage (slots)
+  - Query count, query times, slot utilization
+  - Number of tables, stored and uploaded bytes over time
+  - Alerts on metrics (ex: long query times)
+    - Example: Alert when queries take more than 1 minute
+  - No data on **who** is doing what, or query details
+
+### Stackdriver Logging - 'paper trail'
+- Logging = who is doing what
+- Record of jobs and queries associated with accounts
+
+## BigQuery Best Practices
+
+### Data format for import
+- Best performance = Avro format
+- Scenario: Import multi-TB databases with millions of rows
+  Avro - Compressed > Avro - Uncompressed
+
+### Partitioned tables
+- What is a partitioned table?
+  - Special single table divided into segments - "partitions"
+- Why is this important 
+  - Query only certain rows (partitions) instead of entire table
+    - Limits amount of read data
+    - Improves performance 
+    - Reduce costs
+  - Partition types
+    - Ingest time - when the data/row as created
+    - Included TIMESTAMP or DATE column
+  - Scenario: Large amount of data that is generated every day => need to query only certain time periods within same table
+- Why not use multiple tables (one for each day) + wildcards?
+  - Limited to 1000 tables per dataset
+  - Substantial performance drop vs. single table
+
+### Clustered tables
+- Taking partitioned tables "to the next level"
+- Similar to partitioning, divides table reads by a specified column field
+  - Instead of dividing by date/time, divides by field
+- Scenario: Logistics company needs to query by tracking IB
+  - Cluster by tracking ID column = only reading table rows with specified tracking ID's
+- Restriction: only (currently) available for partitioned tables
+
+### Slots 
+- Computational capacity required to run a SQL query
+  - Bigger/more complex queries need more slots
+- Default, on demand pricing allocates 2000 slots 
+  - Only an issue for extremely complex queries, or high number of simultaneous users
+  - If more than 2000 slots required, switch to **flat rate pricing**
+
+### Backup and recovery
+- Highly-available = multi-regional dataset vs. regional 
+- Backup/recovery - BigQuery automatically takes continuous snapshot of tables
+  - 7 days history - 2 days if purposely deleted
+- Restore to previous point in time using '@(time)', in milliseconds
+- Example: get snapshot from one hour ago
+  ```sql
+  SELECT * FROM [PROJECT_ID:DATASET.TABLE@-3600000]
+  ```
+- Alternatively, export table data to GCS, though not as cost effective.
