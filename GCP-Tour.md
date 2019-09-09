@@ -125,3 +125,35 @@ destination.~~: *Transfer Appliance is used for on-premises transfers, not cloud
 **43. Your team has decided to use Datalab for interactive machine learning exercises. You want your team members to share their work and progress with each other. How do you accomplish this?**
 
 - Every team member will use their own Datalab notebook and synchronize changes to the shared Cloud Source Repository.
+
+**44. Your production Bigtable instance is currently using four nodes. Due to the increased size of your table, you need to add additional nodes to offer better performance. How should you accomplish this without the risk of data loss?**
+
+- Edit instance details and increase the number of nodes. Save your changes. Data will re-distribute with no downtime.
+
+**45. You have 250,000 devices which produce a JSON device status event every 10 seconds. You want to capture this event data for outlier time series analysis. What should you do?**
+
+- Ship the data into Cloud Bigtable. Use the Cloud Bigtable cbt tool to display device outlier data based on your business requirements.
+
+**46. Why do you want to train a machine learning model locally before training on cloud resources?**
+
+- Faster iteraction
+- Save costs
+
+**47. You are building storage for files for a data pipeline on Google Cloud. You want to support JSON files. The schema of these files will occasionally change. Your analyst teams will use running aggregate ANSI SQL queries on this data. What should you do?**
+
+- Use BigQuery for storage. Select Automatically detect in the Schema section.
+
+**48. Your company's Kafka server cluster has been unable to scale to the demands of their data ingest needs. Streaming data ingest comes from locations all around the world. How can they migrate this functionality to Google Cloud to be able to scale for future growth?**
+
+- Create a single Pub/Sub topic. Configure endpoints to publish to the Pub/Sub topic, and configure Cloud
+Dataflow to subscribe to the same topic to process messages as they come in.
+
+**49. You are training a facial detection machine learning model. Your model is suffering from overfitting your training data. Choose three steps you can take to solve this problem.**
+
+- Use a smaller set of features
+- Increase the number of training examples
+- Increase the regularization parameters
+
+**50. You are building a machine learning model to predict the number of lightning strikes during a storm. Your model has thousands of input features to train on. You want to improve the training speed of the model by removing features, but do not want to negatively effect your model's accuracy. What action should you take?**
+
+- Combine highly co-dependent and redundant features into one representative feature
