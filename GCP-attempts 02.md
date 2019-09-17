@@ -1,4 +1,6 @@
-**Which of these open source frameworks is best suited to process simultaneous batch and streaming in a single data pipeline?**
+# Google Cloud Data Engineer - Final Exam - Attempts 2
+
+**1. Which of these open source frameworks is best suited to process simultaneous batch and streaming in a single data pipeline?**
 
 - Apache Beam
 
@@ -107,3 +109,107 @@ view instead of the main table.
 **26. Triggers that applies to Dataflow**
 
 - Element count, Combinations of other triggers and Timestamp, ... but not Element size in bytes. 
+
+**27. You are developing an application that will only recognize and tag specific business to business product logos in images. What is the best method to accomplish this task?**
+
+- Create a custom machine learning model to recognize specific logos in photos, then train it on Cloud ML Engine.
+
+**28. You need to replicate the logs that are ingested by your on-premises Apache Kafka cluster to Google Cloud to be stored for analysis in BigQuery. What should you do?**
+
+- Configure the Pub/Sub Kafka connector on your on-premises Kafka cluster, and configure Pub/Sub as a sink connector. Use a Cloud Dataflow job to read from a subscribed Pub/Sub topic and write to BigQuery. 
+
+**29. In machine learning, what is the difference between test and training data?**
+
+- Training data has a label attached to train on features for the correct answer. Test data is used to test the trained model for accuracy when completed on new data.
+
+**30. You are building a data pipeline on Google Cloud. You need to prepare source data for a machinelearning model. This involves quickly deduplicating rows from three input tables and also removing outliers from data columns where you do not know the data distribution. What should you do?**
+
+- Use Cloud Dataprep to preview the data distributions in sample source data table columns. Click on each column name, click on each appropriate suggested transformation, and then click Add to add each transformation to the Cloud Dataprep job.
+
+**31. Your company’s aging Hadoop servers are nearing end of life. Instead of replacing your hardware, your CIO has decided to migrate the cluster to Google Cloud Dataproc. A direct lift and shift migration of the cluster would require 30 TB of disk space per individual node. There are cost concerns about using that much storage. How can you best minimize the cost of the migration?**
+
+- Decouple storage from computer by placing the data in Cloud Storage
+
+**32. Your organization needs to be able to reliably handle ever-increasing amounts of streaming telemetry data, process it, and economically store analyzed data. What services should they use for this task?**
+
+- Cloud Pub/Sub, Cloud Dataflow, Bigquery
+
+**33. You are working on a project with two compliance requirements. The first requirement states that your developers should be able to see the Google Cloud Platform billing charges for only their projects. The second requirement states that your finance team members can set budgets and view the current charges for all projects in the organization. The finance team should not be able to view the project contents. You want to set permissions. What should you do?**
+
+- Add the finance team members to the Billing Administrator role for each of the billing accounts that they need to manage. Add the developers to the Viewer role for the Project.
+
+**34. Which of these numbers are adjusted by a machine learning neural network as it works with its training dataset?**
+
+- Weights and Biases
+
+**35. Two benefits of using denormalized data in BigQuery?**
+
+- Decreased query complexity
+- Increased query performance
+
+**36. When training a machine learning model, why do you need separate training and test data?**
+
+- Without different data, your model will not generalize for additional data, known as overfitting.
+
+**37. What types of jobs does Cloud Dataproc support?**
+
+- Hive, Pig and Spark, ...
+
+**38. You are training a facial detection machine learning model. Your model is suffering from overfitting your training data. Choose three steps you can take to solve this problem**
+
+- Use a smaller set of features
+- Increase the number of training examples
+- Increase the regularization parameters
+
+**39. You are selecting a streaming service for log messages that must include final result message ordering as part of building a data pipeline on Google Cloud. You want to stream input for 5 days and be able to query the most recent message value. You will be storing the data in a searchable repository. How should you set up the input messages?**
+
+- Use Cloud Pub/Sub for input. Attach a timestamp to every message in the publisher.
+
+**40. You want to display aggregate view counts for your YouTube channel data in Data Studio. You want to see the video tiles and view counts summarized over the last 30 days. You also want to segment the data by the Country Code using the fewest possible steps. What should you do?**
+
+- Set up a YouTube data source for your channel data for Data Studio. Set Views as the metric and set Video Title and Country Code as report dimensions.
+
+**41. Why do you want to train a machine learning model locally before training on cloud resources**
+
+- Faster iteration.
+- Save costs
+
+**42. Your infrastructure includes two 100-TB enterprise file servers. You need to perform a one-way, onetime migration of this data to the Google Cloud securely. Only users in Germany will access this data. You want to create the most cost-effective solution. What should you do?**
+
+- Use Transfer Appliance to transfer the offsite backup files to a Cloud Storage Regional storage bucket as a final destination: *This answer is correct because you are performing a one-time (rather than an ongoing series) data transfer from onpremises to Google Cloud Platform for users in a single region (Germany). Using a Regional storage bucket will reduce cost and also conform to regulatory requirements.*
+- ~~Use Storage Transfer Service to transfer the offsite backup files to a Cloud Storage Regional storage bucket as a final destination~~: *Storage Transfer Service is not for data stored on-premises, but for AWS/Google Cloud/online locations.*
+
+**43. As part of your backup plan, you create regular boot-disk snapshots of Compute Engine instances that are running. You want to be able to restore these snapshots using the fewest possible steps for replacement instances. What should you do?**
+
+- Use the snapshots to create replacement instances as needed.
+
+**44. While conducting BigQuery queries against a large table with many columns, you notice in the details section that you have a very large purple bar in the first stage of your query execution. How can you troubleshoot this to increase performance and reduce costs?**
+
+- Restrict the number of columns in your SELECT field for those needed. This will reduce read times on your query: *The purple bar indicates the number of read operations. Limiting columns read will reduce the read time of your query.*
+- Partition or separate your large table into smaller pieces. Conduct a query against your smaller (or partitioned) tables to reduce read times.
+
+**45. When using AI Platform to train machine learning models, how are online predictions different from batch predictions?**
+
+- Online predictions are returned in the response message.
+- Batch predictions are optimized to handle a high volume of prediction examples while running on more complex models.
+
+**46. You are migrating a Hadoop cluster to Cloud Dataproc using GCS for storage. After migration, some of your existing, more complex Spark jobs (in parquet format) are performing noticably worse than your on-premises cluster. You are using mostly preemptible VM's (with a few required nonpreemptible) in order to save on costs.**
+
+- Switch disks from HDD to SSD. Change the default preemptible VM settings to increase the size of the boot disk: *By default, preemptible node disk sizes are limited to 100GB or the size of the non-preemptible node disk sizes, whichever is smaller. However you can override the default preemptible disk size to any requested size. Since the majority of our cluster is using preemptible nodes, the size of the disk used for caching operations will see a noticeable performance improvement using a larger disk. Also, SSD's will perform better than HDD. This will increase costs slightly, but is the best option available while maintaining costs.*
+
+**47. You are evaluating a storage solution for your data. Your data is in a structured, non-relational format, and will be used for analysis. You need the lowest latency read and write speeds possible. Your data is about 3 TB in size, predicted to grow to up to 5 TB. What solution should you use?**
+
+- Use Cloud Bigtable with SSD storage.
+
+**48. Your organization is streaming telemetry data into BigQuery for long-term storage (2 years) and analysis, at the rate of about 100 million records per day. They need to be able to run queries against certain time periods of data without incurring the costs of querying all available records. What is the preferred method for doing so?**
+
+- Partition a single table by day, and run queries against individual partitions.
+
+**49. You regularly use prefetch caching with a Data Studio report to visualize the results of BigQuery queries. You want to minimize service costs. What should you do?**
+
+- Set up the report to use the Owner's credentials to access the underlying data in BigQuery, and verify that the Enable cache checkbox is selected for the report.
+
+**50. Your organization needs to develop their machine learning model to control topology definitions. There are a large number of possible configurations to achieve the best results. What components of their machine learning model would they adjust to account for increased complexity? (Choose two answers.)**
+
+- Neurons
+- Hidden layers
