@@ -6,3 +6,5 @@
   - dynamically adjust the price? 
   - make decisions around predictive insights repeatable
 - ML is about scaling up BI and decision making
+
+## Stage 1: Train an ML model with examples
