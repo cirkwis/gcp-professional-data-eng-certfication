@@ -5,11 +5,11 @@
 - ~~The HBase shell is a hypervisor based shell that performs administrative tasks, such as creating and deleting new virtualized instances.~~
 - ~~The HBase shell is a command-line tool that performs only user account management functions to grant access to Cloud Bigtable instances.~~
 
-```
+<div>
 The HBase shell is a command-line tool that performs administrative tasks, such as creating and deleting tables. The Cloud Bigtable HBase client for Java makes it possible to use the HBase shell to connect to Cloud Bigtable.
 
 Reference: https://cloud.google.com/bigtable/docs/installing-hbase-shell
-```
+</div>
 
 **What is the recommended action to do in order to switch between SSD and HDD storage for your Google Cloud Bigtable instance?**
 - ~~create a third instance and sync the data from the two storage types via batch jobs~~
