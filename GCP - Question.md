@@ -17,7 +17,7 @@ Reference: https://cloud.google.com/bigtable/docs/installing-hbase-shell
 - ~~run parallel instances where one is HDD and the other is SDD~~
 - ~~the selection is final and you must resume using the same storage type~~
 
-```
+<div>
 When you create a Cloud Bigtable instance and cluster, your choice of SSD or HDD storage for the cluster is permanent. You cannot use the Google Cloud
 Platform Console to change the type of storage that is used for the cluster.
 If you need to convert an existing HDD cluster to SSD, or vice-versa, you can export the data from the existing instance and import the data into a new instance.
@@ -25,5 +25,5 @@ If you need to convert an existing HDD cluster to SSD, or vice-versa, you can ex
 Alternatively, you can write - a Cloud Dataflow or Hadoop MapReduce job that copies the data from one instance to another.
 
 Reference: https://cloud.google.com/bigtable/docs/choosing-ssd-hdd
-```
+</div>
 
