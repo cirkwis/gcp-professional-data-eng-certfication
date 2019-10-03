@@ -83,6 +83,24 @@
     - Deploy trained models: command = 'submit job deploy trained model' on AI Platform
     - 'Failed' jobs can be monitored for troubleshooting
 
+## Typical process
+
+![Typical process](./image/6-4.JPG "Typical process")
+
+## IAM roles
+- Project & Models
+    - Admin - Full control
+    - Developer - Create training/prediction jobs, models/versions, send prediction requests
+    - Viewer - Read-only access to above
+- Models only: 
+    - Model Owner: full access to model and versions
+    - Model User: Read models and use for prediction
+
+## Using BigQuery for data source 
+- Can read directly from BigQuery via training application
+- Recommended to pre-process into Cloud Storage
+
+
 ## Features Engineering: Good features
 - Good features bring human insight to problem
 - Options for encoding categorical data. These are all different ways to create a SPARSE-column
