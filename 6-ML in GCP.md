@@ -100,30 +100,81 @@
 - Can read directly from BigQuery via training application
 - Recommended to pre-process into Cloud Storage
 
+## Working with Neural Networks
+
+### Key terminology
+- Neural network - model composed of layers, consisting of connected units (neurons): Learning from training datasets
+- Neuron - node, combines input values and creates one output value
+- Input - what you feed into a neuron 
+- Feature - input variable used to make predictions
+    - Detecting email spam (subject, keywords, sender address)
+    - Identity animals (ears, eyes, colors, shapes)
+- Hidden layer - set of neurons operating from same input set
+- Feature engineering - deciding which features to use in a model
+- Epoch - single pass through training dataset
+    - Speed up training by training on a subset of data vs all data
+
+### Making Adjustments with Parameters
+- Weights - multiplication of input values
+- Bias - value of output given a weight of O
+- ML adjusts these parameters automatically
+- Parameters = variables adjusted by training with data
+
+### Rate of adjustments with Learning Rate
+- Magnitude of adjustments of weights and biases 
+- Hyperparameter = variables about the training process itself 
+    - Also includes hidden layers 
+    - Not related to training data
+- Gradient descent - technique to minimize loss (error rate)
+- Challenge is to find the correct learning rates:
+    - Too small - takes forever
+    - Too large - overshoots
+![Rate of adjustments with Learning Rate](./image/6-5.JPG "Rate of adjustments with Learning Rate")
+
+### Deep and wide neural networks
+- Wide - memorization: Many features
+- Deep - generalization: Many hidden layers
+- Deep and wide = both: Good for recommendation engines
+
+![Deep and wide neural networks](./image/6-6.JPG "Deep and wide neural networks")
 
 ## Features Engineering 
 
 ### Good features
-- Good features bring human insight to problem
-- Options for encoding categorical data. These are all different ways to create a SPARSE-column
-- Crossing features can simplify learning: crossing two or more feature to make a new feature. 
+- Should be related to the objective
+    - Reasonable hypothesis for why feature value matters
+    - Different problems in same domain may need different features
+- Should be known at production-time
+    - Feature value should be known at the time that the prediction is made
+    - Causal: can not realy on future information
+    - Legal/ethical to collect use that information
+- Has to be numeric with meaningful magnitude
+    - Non-numeric features can be used, it's just that we need to find a way to represent them in numeric form
+- Has enough examples
+    - Each value of each feature in dataset has to be understandable in context
+- Brings human insight to problem 
 
-### Causuality
-- Feature value known at the time prediction is made? 
-- Causal: can not realy on future information
-- Must ingest that data in timely manner
-- Legal/ethical to collect use that information
+### Categorical feature
+- Raw data are converted to numeric features in different ways
+- Overly specific attributes should be discarded
+- Categorical values could be one-hot encoded 
+    ![Categorical feature](./image/6-7.JPG "Categorical feature")
+    - employeeId=72365 would get one-hot encoded assuming that there are a total of 5 employees who could be doing the serving
+    - Sparse-column-with-keys converts 72365 to an indexed-value (e.g 2) and one-hot-column changes it to (0-1-0-0-0)
 
-### Numeric with meaningful magnitude
-- Non-numeric features can be used, it's just that we need to find a way to represent them in numeric form
-
-### Enough example
-
-### Bucketizing 
-The transformation of numeric features into categorical features, using a set of thresholds, is called bucketing (or binning)
+### Bucketizing and Crossing
+- The transformation of numeric features into categorical features, using a set of thresholds, is called bucketing (or binning)
+- A feature cross is a synthetic feature formed by multiplying (crossing) two or more features. Crossing combinations of features can provide predictive abilities beyond what those features can provide individually.
 
 ### Wide and Deep 
 - Two types of features: Dense and Sparse
 ![Dense and Sparse](./image/6-1.JPG "Dense and Sparse")
-- DNNs good for dense, higly correlated
-- Linear for spare, independent features 
+- DNNs good for dense, higly correlated (**#question**)
+- Linear for spare, independent features (**#question**)
+
+### Hyperparameter tuning
+- Possible hyperparameters: batch size, epoch, learning rate
+- Cloud MLE supports hyperparameter tuning: 
+    - Make the parameter a command-line argument
+    - Make sure outputs don't clobber each other
+    - Supply hyperparameters to training job
