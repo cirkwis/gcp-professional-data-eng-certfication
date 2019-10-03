@@ -101,23 +101,28 @@
 - Recommended to pre-process into Cloud Storage
 
 
-## Features Engineering: Good features
+## Features Engineering 
+
+### Good features
 - Good features bring human insight to problem
 - Options for encoding categorical data. These are all different ways to create a SPARSE-column
 - Crossing features can simplify learning: crossing two or more feature to make a new feature. 
-## Features Engineering: Causuality
+
+### Causuality
 - Feature value known at the time prediction is made? 
 - Causal: can not realy on future information
 - Must ingest that data in timely manner
 - Legal/ethical to collect use that information
-## Features Engineering: Numeric with meaningful magnitude
-- Non-numeric features can be used, it's just that we need to find a way to represent them in numeric form
-## Features Engineering: Enough example
 
-## Features Engineering: Bucketizing 
+### Numeric with meaningful magnitude
+- Non-numeric features can be used, it's just that we need to find a way to represent them in numeric form
+
+### Enough example
+
+### Bucketizing 
 The transformation of numeric features into categorical features, using a set of thresholds, is called bucketing (or binning)
 
-## Features Engineering: Wide and Deep 
+### Wide and Deep 
 - Two types of features: Dense and Sparse
 ![Dense and Sparse](./image/6-1.JPG "Dense and Sparse")
 - DNNs good for dense, higly correlated
