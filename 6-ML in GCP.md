@@ -7,13 +7,13 @@
   - make decisions around predictive insights repeatable
 - ML is about scaling up BI and decision making
 
-## Stage 1: Train an ML model with examples
+### Stage 1: Train an ML model with examples
 - The first stage of ML is to train an ML model with examples. 
 - In this section, we focus on supervised learning which starts from examples. 
 - An example consists of an input and a label (the true answer of this input). 
 - The model is a mathematical function having a bunch of adjustable parameters. 
 
-## Stage 2: Predict with trained model
+### Stage 2: Predict with trained model
 - After the model is trained, we can use it to "predict" the label of input that it has never seen before. 
 
 ## Supervised vs Unsupervised learning
@@ -66,7 +66,7 @@
     - Training automatically the model
 ![AI Platform](./image/6-2.JPG "AI Platform")
 
-## How AI Platform works:
+## AI Platform
 - Prepare trainer and data for the cloud: 
     - write training application in Tensorflow (or other ML library)
     - Python is language of choice
@@ -77,7 +77,7 @@
 
 ![AI Platform](./image/6-3.JPG "AI Platform")
 
-## Get Predictions - two types: 
+### Get Predictions - two types: 
 - Online: 
     - High rate of requests with minimal latency
     - Give job data in JSON request string, predictions returned in its response message
@@ -85,7 +85,7 @@
     - Get inference (predictions) on large collections of data with minimal job duration
     - Input and output in Cloud Storage
 
-## Key terminology in AI Platform
+### Key terminology in AI Platform
 - Model - logical container individual solutions to a problem: 
     - Can deploy multiple version
 - Version - instance of model
@@ -94,11 +94,11 @@
     - Deploy trained models: command = 'submit job deploy trained model' on AI Platform
     - 'Failed' jobs can be monitored for troubleshooting
 
-## Typical process
+### Typical process
 
 ![Typical process](./image/6-4.JPG "Typical process")
 
-## IAM roles
+### IAM roles
 - Project & Models
     - Admin - Full control
     - Developer - Create training/prediction jobs, models/versions, send prediction requests
@@ -107,7 +107,7 @@
     - Model Owner: full access to model and versions
     - Model User: Read models and use for prediction
 
-## Using BigQuery for data source 
+### Using BigQuery for data source 
 - Can read directly from BigQuery via training application
 - Recommended to pre-process into Cloud Storage
 
@@ -140,7 +140,7 @@
 - Challenge is to find the correct learning rates:
     - Too small - takes forever
     - Too large - overshoots
-![Rate of adjustments with Learning Rate](./image/6-5.JPG "Rate of adjustments with Learning Rate")
+    ![Rate of adjustments with Learning Rate](./image/6-5.JPG "Rate of adjustments with Learning Rate")
 
 ### Deep and wide neural networks
 - Wide - memorization: Many features
@@ -184,7 +184,8 @@
 - Linear for spare, independent features (**#question**)
 
 ### Hyperparameter tuning
-- Possible hyperparameters: batch size, epoch, learning rate
+- These parameters express “higher-level” properties of the model such as its complexity or how fast it should learn;
+- Possible hyperparameters: batch size, epoch, learning rate, Number of hidden layers 
 - Cloud MLE supports hyperparameter tuning: 
     - Make the parameter a command-line argument
     - Make sure outputs don't clobber each other
