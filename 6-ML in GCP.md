@@ -11,6 +11,17 @@
 - The first stage of ML is to train an ML model with examples. 
 - In this section, we focus on supervised learning which starts from examples. 
 - An example consists of an input and a label (the true answer of this input). 
+- The model is a mathematical function having a bunch of adjustable parameters. 
+
+## Stage 2: Predict with trained model
+- After the model is trained, we can use it to "predict" the label of input that it has never seen before. 
+
+## Supervised vs Unsupervised learning
+![Supervised vs Unsupervised learning](./image/6-8.JPG "Supervised vs Unsupervised learning")
+- With supervised models, we have labels, the correct answers to whatever it is that we want to learn to predict
+- In unsupervised learning, the data does not have labels
+    - Unsupervised problems are all about discovery, about looking at the raw data, and seeing if it naturally falls into groups. 
+
 
 ## Preventing Overfitted Training Models 
 
