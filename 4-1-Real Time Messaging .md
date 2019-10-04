@@ -1,23 +1,42 @@
-# Architecture: Real Time Messaging with Cloud Pub/Sub
+# Architecture: Real Time Messaging
 
 In this part, we will cover the challenges associated with reliably capturing streaming data, tightly vs. loosely coupled systems, and how Cloud Pub/Sub helps to resolve this issue.
 
 ## Streaming Data Challenges
 
-- What is streaming data
-  - "Unbounded" data
-  - Infinitie, never completes, always flowing
-  - Ex: Traffic sensors, Credit Card Transactions, Mobile Gaming
-- Fast action is often necessary
-  - Must quickly collect data, gain insights and take action
-  - Sending to storage can add latency
-  - Credit card fraud
-  - Predict highway traffic
+- Streaming is basically data processing on unbounded data; 
+- Well streaming processing design: low latency, speculative or partial results, ability to flexibly reason about time, controls for correctness, and the power to peform complex analysis; 
+- Streaming processing makes data processing possible to derive real-time insights from growing data: 
+  - Scale to variable volumnes
+  - Act on real-time data using continuous queries
+  - Derive insights from data in flight
+
+### Challenge #1: Variable volumes requires ability of ingest to scale and be fault-tolerant
 - Tight vs loosely coupled systems
   - Tightly (direct) coupled systems more likely to fail
   - Loosely coupled systems with "buffer" scale with better fault tolerance
 
   ![Tight vs loosely coupled systems](./image/4-1.jpg "Tight vs loosely coupled systems")
+
+### Challenge #2: Latency is to be expected
+- Streaming data can be late and unordered due to a variety of reasons: 
+  - Transmit: Network delay or unavailable, Ingest delay (write latency), Ingest failure
+  - Ingest: Throughput (read latency), Backlog, Hardware failure
+  - Process: Starved resources, Internal backlog
+- The Dataflow/Beam model maps onto the four questions that are relevant in any out-of-order data processing pipeline: 
+  - **What results are calculated?** Answered via transformations. 
+  - **Where in event time are results calculated?** Answered via event-time windowing. 
+  - **When in processing time are results materialized?** Answered via watermarks, triggers, and allowed lateness
+  - **How do refinements of results relate?** Answered via accumulation modes
+
+### Challenge #3: Need instant insights
+- Continuous query processing, Visualization, Analytics, etc
+- BigQuery lets you ingest streaming data and run queries as the data arrives
+- A system that can deal with reference/historical data and live streaming data if you want real time insight. To realize this task, both historical and live data need to be integrated within the same application at time of analyzing;  
+
+### Streaming data processing on GCP: A common configuration
+ ![A common configuration](./image/4-1-2.JPG "A common configuration")
+
 
 ## Cloud Pub/Sub Overview
 
@@ -25,6 +44,11 @@ We are now going to take a detailed look at what exactly Pub/Sub does, how the p
 
 ### What is Cloud Pub/Sub?
 - Global-scale messaging buffer/coupler
+  - Number of publishers
+  - Number of subscribers
+  - Size of messages 
+  - Number of messages
+  - Throughput of messages
 - No-ops, global availability, auto-scaling
 - Decouples senders and receivers
 - Streaming data ingest
@@ -32,12 +56,35 @@ We are now going to take a detailed look at what exactly Pub/Sub does, how the p
 - Equivalent to Apache Kafka (open source)
 - Guaranteed at-least-one delivery
 - Asynchronouse messaging - many to many (or any other combination)
+- Durability: Messages are saved to be delivered later, when subscribers are not around to receive them. 
 
  ![Tight vs loosely coupled systems](./image/4-2.jpg "Tight vs loosely coupled systems")
 
 ### How it works - terminology?
 
   ![How it works - terminology?](./image/4-3.jpg "How it works - terminology?")
+
+##  Pub/Sub Hands On
+1. Create a topic called my-topic
+```shell
+gcloud pubsub topics create my-topic
+```
+2. Create a subscription to topic my-topic
+```shell
+gcloud pubsub subscriptions create --topic my-topic mySub1
+```
+3. Publish a message to topic my-topic
+```shell
+gcloud pubsub topics publish my-topic --message "Hello"
+```
+4. Retrieve message with your subscription, acknowledge receipt and remove message from the queue
+```shell
+gcloud pubsub subscriptions pull --auto-ack mySub1
+```
+5. Cancel subscription
+```shell
+gcloud pubsub subscriptions delete mySub1
+```
 
 ### Push and Pull
 - Pub/Sub can either **push** messages to subcribers, or subscribers can **pull** messages from Pub/Sub;
@@ -92,28 +139,6 @@ We are now going to take a detailed look at what exactly Pub/Sub does, how the p
 Streaming data ingest - GCP 
 
 ![Streaming data ingest](./image/4-4.jpg "Streaming data ingest")
-
-##  Pub/Sub Hands On
-1. Create a topic called my-topic
-```shell
-gcloud pubsub topics create my-topic
-```
-2. Create a subscription to topic my-topic
-```shell
-gcloud pubsub subscriptions create --topic my-topic mySub1
-```
-3. Publish a message to topic my-topic
-```shell
-gcloud pubsub topics publish my-topic --message "Hello"
-```
-4. Retrieve message with your subscription, acknowledge receipt and remove message from the queue
-```shell
-gcloud pubsub subscriptions pull --auto-ack mySub1
-```
-5. Cancel subscription
-```shell
-gcloud pubsub subscriptions delete mySub1
-```
 
 ## Example use case
 1. Simulated traffic ingest:
