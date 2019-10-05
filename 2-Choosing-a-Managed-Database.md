@@ -71,21 +71,21 @@
 - NoSQL/non-relational database
     - Flexible structure/relationship between objects
 
-### Use Datastore for...
+## Use Datastore for...
 - Applications that need highly available structured data, at scale
 - Product catalogs, real-time inventory
 - User profiles - mobile apps
 - Game save states
 - ACID transactions - e.g. transferring funds between accounts
 
-### Do not use Datastore for...
+## Do not use Datastore for...
 - Analytics (full SQL semantics) => Use BigQuery/Cloud Spanner
 - Extreme scale (10M+ read/writes per second) => Use Bigtable
 - Don't ned ACID transactions/data not highly structured => Bigtable
 - Lift and shift (existing MySQL) => Use Cloud SQL
 - Near zero latency (sub-10ms) => Use in-memory database (Redis)
 
-### Other important facts
+## Other important facts
 - Single Datastore per project
 - Multi-regional for wide access, single region for lower latency for single location
 - Datastore is a transactional database 

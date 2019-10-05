@@ -1,4 +1,4 @@
-# Architecture: Data Processing Pipelines
+# Data Processing Pipelines
 
 ## Data Processing Challenges
 
