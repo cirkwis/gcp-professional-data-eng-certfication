@@ -7,22 +7,23 @@
 - Read Data (input)
 - Transform it to be relevant - Extract, Transform and Load (ETL)
 - Create output
+- Element-wise stream processing, each element is independently processed so you can do it as soon as it arrives
+- Aggregations require all the data elements to be available in order to perform the operation and give and accurate answer (even when data comes in late or out of order)
+  ![Element wise vs Aggregation](./image/5-1.png "Element wise vs Aggregation")
 
 ### Challenge: Streaming and Batch data pipelines
 ![Challenge: Streaming and Batch data pipelines](./image/4-2-2.png "Challenge: Streaming and Batch data pipelines")
 - Until recently, separate pipelines required for each
 - Difficult to compare recent and historical data
 - One pipeline for "fast", another for "accurate"
+- Why both? Compare streaming transactions to historical batch data to detect fraud
 
-### Why both? 
-- Credit card monitoring
-- Compare streaming transactions to historical batch data to detect fraud
-
-### Challenge: Complex element processing
-- Element = single data input
-- One at a time element ingest from single source = easy
-- Combining elements (aggregation) = hard
-- Processing data from different sources, streaming, and out of order (composite) = REALLY hard
+### Challenge: Unbounded data
+- Unbounded data due to multitude of reasons: delay in the network, server crashed,...
+- Element processing = single data input = once at a time, element ingested from single source
+- Combining elements (aggregation)
+- Processing data from different sources, streaming, and out of order (composite)
+- Naturally, we could split streaming processing into processing time windows but not enough;
 
 **GCP Solution: Apache Beam + Cloud Dataflow**
 
@@ -38,6 +39,15 @@
 - Pipelines are regional-based
 
 ![Cloud Dataflow Overview](./image/4-2-3.png "Cloud Dataflow Overview")
+
+### Apache Beam
+- Beam supports time-based shuffle (Windowing)
+  ![Apache Beam](./image/5-2.PNG "Apache Beam")
+- Time based shuffling takes input data and treat time as key:
+  - What we'd really like to have is to have event-time windowing;
+  - As input is arriving, we are performing a time-based shuffle, to place the records into windows based on their event times
+  - The way to do this in dataflow, is via Windowing API
+  - Windowing divides events into finite time based chunks and lets you reason about them
 
 ### IAM
 - Project-level only - all pipelines in project (or none)
@@ -59,14 +69,6 @@
 
 ![Dataflow vs Dataproc? Beam vs Hadoop/Spark?](./image/4-2-4.png "Dataflow vs Dataproc? Beam vs Hadoop/Spark?")
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-op08{font-weight:bold;background-color:#ffffff;color:#333333;border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-baqh{text-align:center;vertical-align:top}
-.tg .tg-ncgp{background-color:#ffffff;color:#333333;border-color:inherit;text-align:center;vertical-align:top}
-</style>
 <table class="tg">
   <tr>
     <th class="tg-op08">Workloads</th>
