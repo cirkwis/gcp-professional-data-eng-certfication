@@ -25,10 +25,9 @@
 - Processing data from different sources, streaming, and out of order (composite)
 - Naturally, we could split streaming processing into processing time windows but not enough;
 
-**GCP Solution: Apache Beam + Cloud Dataflow**
+# GCP Solution: Apache Beam + Cloud Dataflow
 
-## Cloud Dataflow Overview
-### What is it?
+## Cloud Dataflow
 - Auto scaling, No-Ops, Stream and Batch Processing 
 - Built on Apache Beam
   - Documentation refers to Apache Beam sit
@@ -40,7 +39,7 @@
 
 ![Cloud Dataflow Overview](./image/4-2-3.png "Cloud Dataflow Overview")
 
-### Apache Beam
+## Apache Beam
 - Beam supports time-based shuffle (Windowing)
   ![Apache Beam](./image/5-2.PNG "Apache Beam")
 - Time based shuffling takes input data and treat time as key:
@@ -49,7 +48,7 @@
   - The way to do this in dataflow, is via Windowing API
   - Windowing divides events into finite time based chunks and lets you reason about them
 
-### IAM
+## IAM
 - Project-level only - all pipelines in project (or none)
 - Pipeline data access separate from pipeline access 
 - Dataflow admin - Full pipeline access + machine type/storage bucket config access
@@ -57,15 +56,7 @@
 - Dataflow Viewer - view permission only
 - Dataflow Worker - Specifically for service accounts
   
-### Dataflow vs Dataproc? Beam vs Hadoop/Spark?
-- Dataproc
-  - Familiar tools/packages
-  - Employee skill sets
-  - Existing pipelines
-- Dataflow 
-  - Less overhead
-  - Unified batch and stream processing
-  - Pipeline portability across Dataflow, Spark, and Flink as runtimes. 
+## Dataflow vs Dataproc? Beam vs Hadoop/Spark?
 
 ![Dataflow vs Dataproc? Beam vs Hadoop/Spark?](./image/4-2-4.png "Dataflow vs Dataproc? Beam vs Hadoop/Spark?")
 
