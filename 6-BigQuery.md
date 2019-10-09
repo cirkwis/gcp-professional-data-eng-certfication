@@ -66,6 +66,7 @@
 - Querying tables
   - FROM `project.dataset.table` (Standard SQL)
   - FROM [project:dataset.table] (Legacy SQL)
+
 ### Searching multiple tables with wildcards
 - Documentation: https://cloud.google.com/bigquery/docs/querying-wildcard-tables?hl=en
 - Query across multiple, similarly named tables
@@ -84,8 +85,7 @@
         `bigquery-public-data.noaa_gsod.gsod19*`
     WHERE
         max != 9999.9 # code for missing data
-        AND _TABLE_SUFFIX BETWEEN '29'
-        AND '40'
+        AND _TABLE_SUFFIX BETWEEN '29' AND '40'
     ORDER BY max DESC
   ```
 - Advanced SQL queries allowed: JOINS, sub queries, CONCAT
