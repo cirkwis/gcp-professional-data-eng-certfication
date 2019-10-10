@@ -45,6 +45,44 @@
 >Thus, the best approach for this scenario is Option B.
 >
 ><strong>Source(s) :</strong> <a href="https://cloud.google.com/automl/" target="_blank">Google Cloud AutoML</a>, <a href="https://cloud.google.com/ml-engine/" target="_blank">Cloud Machine Learning Engine</a>
+
+**3. A financial services firm providing products such as credit cards and bank loans receives thousands of online applications from clients applying for their products. Because it takes a lot of effort to scan and check all applications if they meet the minimum requirements for the products they are applying for, they want to build a machine learning model takes application fields like annual income, marital status, date of birth, occupation and other attributes as input and finds out if the applicant is qualified for the product the client applied for. Which of the following the machine learning technique will help to build such model?**
+
+<ol type="A">
+  <li>Regression</li>
+  <li>Classification</li>
+  <li>Clustering</li>
+  <li>Reinforcement learning</li>
+</ol>
+
+>**The correct answer is Option B.**
+>
+>**A regression problem** is a problem which its output variable is of continuous value. Problems which finds out about variables such as weights, prices or age are considered regression problems. A **classification problem** is a problem which the output variable is a category. Examples of classification problems are finding a passenger’s nationality, detect if a patient is diagnosed with a disease or if an applicant is qualified for a job interview. Regression and classification are supervised learning problems. It means, the machine learns from past experiences by training it on a labeled data set. A training set is a set of rows with input and output parameters. The machine then learns from the training set and improves its parameters for better detection.
+>
+>**Clustering** is an unsupervised learning method. An unsupervised learning is a method to find references between input data without labeled output. The purpose is to find meaningful structure between the input sets with similar features and group them. Clustering is the method of grouping data points share similarities and separating dissimilar points to other groups. Examples of clustering applications are customer segmentation (new, frequent, loyal, ..), city land value and detecting anomalies in network traffic.
+>
+>**Reinforcement learning** is a technique which a machine takes actions without training sets to reach the highest rewards possible. The agent learns from trial and decides what to do to perform a given task without supervision. The task punishes the agent for a wrong action and rewards it for achieving the task. Examples of reinforcement learning is asking an agent to play a maze game to reach the exit with traps along the way or making an agent play a video game and win a racing game.
+>
+>From the explanation above, we can see the scenario problem which finding if a client is qualified for a product is a classification problem. So, option B is correct.
+
+**4. You have built a machine learning model to classify if a customer would buy a certain product when recommended by the company’s website. You trained the model with a sample set. Upon testing the model, you found out only 28% of the testing sets are actually true positives and the model isn’t very accurate. You figured out the model is over-fitted. How would you solve this?**
+
+<ol type="A">
+  <li>Increase training data, increase feature parameters &amp; increase regularization.</li>
+  <li>Decrease training data, decrease feature parameters &amp; increase regularization.</li>
+  <li>Increase training data, decrease feature parameters &amp; increase regularization</li>
+  <li>Increase training data, decrease feature parameters &amp; decrease regularization.</li>
+</ol>
+
+> The correct answer is Option C.
+>
+> Overfitting happens when a model performs well on a training dataset, generating only a small error, while giving wrong output for the test dataset. This happens because the model is only picking up specific features input found in the training set instead of picking out general features of the given training set.
+> To solve overfitting, the following would help improving the model's quality: 
+> - Increase the number of examples, the more data a model is trained with, the more use cases the model can be training on and better improves its predictions. 
+> - Tune hyperparameters which is related to number and size of hidden layers (for neural networks), and regularization, which means using techniques to make your model simpler such as dropout method to remove neuron networks or adding "penalty" parameters to the cost function.
+> - Remove features by removing irrelevant features. Feature engineering is a wide subject and feature selection is a critical part of building and training model. Some algorithms have built-in feature selection, but in some cases, data scientists need to cherry-pick or manually select or remove features for debugging and finding the best model output. 
+>
+> From the brief explanation, to solve the overfitting problem in the scenario, you need to choose option C. 
   
 **1. What is the HBase Shell for Cloud Bigtable?**
 
