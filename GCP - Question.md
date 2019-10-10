@@ -105,6 +105,36 @@
 >
 >From the explanation above, the technique to help solving the scenario is Answer A: Regression.
 
+**A video-on-demand company wants to generate subtitles for its content on the web. They have over 20.000 hours of content to be subtitled and their current subtitle team cannot catch up with the every-growing video hours the content team keep adding to the website library. They want a solution to automate this as man power can be expensive and may take long time. Which service of the following can greatly help the automation of video subtitles?**
+
+<ol type="A">
+  <li>Cloud Natural Language</li>
+  <li>Cloud Speech-to-Text</li>
+  <li>AutoML Vision API</li>
+  <li>Machine Learning Engine</li>
+</ol>
+
+>**Answer: B**
+>
+<strong>Answer A is incorrect: </strong>Cloud natural language service is to derive insights from unstructured text revealing meaning of the documents and categorize articles. It won’t help extracting captions from videos.</p>
+
+<p><strong>Answer B is correct</strong>: Cloud Speech-to-Text is a service to generate captions from videos by detecting speakers language and speech.</p>
+
+<p><strong>Answer C is incorrect: </strong>AutoML Vision API is a service to recognize and derive insights from images by either using pre-trained models or training a custom model based on a set of photographics.</p>
+
+<p><strong>Answer D is incorrect</strong>: Machine Learning Engine is a managed service letting developers and scientists build their own models and run them in production. This means, you have to build your own model to generate text from videos which needs much effort and experience to build such model. So, it’s not a practical solution for this scenario.</p>
+
+<p><strong>Source(s): </strong></p>
+
+<p>Google NLP: <a href="https://cloud.google.com/natural-language/" target="_blank">https://cloud.google.com/natural-language/</a></p>
+
+<p>Google Machine Learning Engine: <a href="https://cloud.google.com/ml-engine/" target="_blank">https://cloud.google.com/ml-engine/</a></p>
+
+<p>Google Vision API: <a href="https://cloud.google.com/vision" target="_blank">https://cloud.google.com/vision</a></p>
+
+<p>Google Speech-to-Text API: <a href="https://cloud.google.com/speech-to-text/" target="_blank">https://cloud.google.com/speech-to-text/</a></p>
+                        </div>
+
 **1. What is the HBase Shell for Cloud Bigtable?**
 
 - ~~The HBase shell is a GUI based interface that performs administrative tasks, such as creating and deleting tables.~~
