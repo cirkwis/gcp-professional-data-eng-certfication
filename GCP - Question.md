@@ -1,9 +1,11 @@
 **1. A multi-national company wants to unify their data sources by building a universal centralized data warehouse instead of their current architecture in which every branch has its own and branches from other regions cannot access it. They want to build a data analytics team to extract data from all branches and build daily reports and dashboards to visualize the metrics required for C-Level managers to take decisions. The current data warehouses are all MySQL databases and analytics team will use SQL for data reporting. The company is distributed among different continents ( North America, Europe &amp; Asia). Which of the following approach is best suits to satisfy the company’s new data warehouse architecture?**
 
-- **A.** Use Cloud SQL to launch MySQL databases on each region. Enable cross-region read replication for each to sync between different regions.
-- **B.** Use Cloud SQL to launch Multi-regional MySQL databases. Each in North America, Europe and Asia. Enable cross-region read replication for each to sync between different regions.
-- **C.** Use BigQuery as a data warehouse and grant data analytics team editor roles.
-- **D.** Use Cloud Spanner by launching a multi-regional database to be the company’s unified data warehouse.
+<ol type="A">
+  <li>Use Cloud SQL to launch MySQL databases on each region. Enable cross-region read replication for each to sync between different regions.</li>
+  <li>Use Cloud SQL to launch Multi-regional MySQL databases. Each in North America, Europe and Asia. Enable cross-region read replication for each to sync between different regions.</li>
+  <li>Use BigQuery as a data warehouse and grant data analytics team editor roles.</li>
+  <li>Use Cloud Spanner by launching a multi-regional database to be the company’s unified data warehouse.</li>
+</ol>
 
 > **The correct answer is Option D**
 > 
@@ -23,10 +25,12 @@
 
 **However, they want it to be available and in production the soonest possible because they expect a high activity on their social media pages by the next public holiday which is coming in 2 weeks and marketing team finds it a great opportunity to receive feedback based on what customers say online. What is the best approach for this?**
 
-- A. Use AutoML Vision to build and train the model by using all the training photos you collected from food-chain’s social media pages for better results.
-- B. Use AutoML Vision to build and train the model by using 50-70% of training photos you collected from food-chain’s social media pages while the rest of training set is to test and tune the model.
-- C. Use Dataproc to build the model using SparkML. Use 50-70% of training photos you collected to train the model and the rest to test and tune the model. Deploy the model using Cloud ML Engine.
-- D. Use Cloud ML Engine with TensorFlow to build the model. Use all training photos you collected to train the model. Deploy the model using Cloud ML Engine.
+<ol type="A">
+  <li>Use AutoML Vision to build and train the model by using all the training photos you collected from food-chain’s social media pages for better results.</li>
+  <li>Use AutoML Vision to build and train the model by using 50-70% of training photos you collected from food-chain’s social media pages while the rest of training set is to test and tune the model.</li>
+  <li>Use Dataproc to build the model using SparkML. Use 50-70% of training photos you collected to train the model and the rest to test and tune the model. Deploy the model using Cloud ML Engine.</li>
+  <li>Use Cloud ML Engine with TensorFlow to build the model. Use all training photos you collected to train the model. Deploy the model using Cloud ML Engine.</li>
+</ol>
 
 >**The correct answer is Option B**
 >
