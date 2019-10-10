@@ -116,24 +116,15 @@
 
 >**Answer: B**
 >
-<strong>Answer A is incorrect: </strong>Cloud natural language service is to derive insights from unstructured text revealing meaning of the documents and categorize articles. It won’t help extracting captions from videos.</p>
-
-<p><strong>Answer B is correct</strong>: Cloud Speech-to-Text is a service to generate captions from videos by detecting speakers language and speech.</p>
-
-<p><strong>Answer C is incorrect: </strong>AutoML Vision API is a service to recognize and derive insights from images by either using pre-trained models or training a custom model based on a set of photographics.</p>
-
-<p><strong>Answer D is incorrect</strong>: Machine Learning Engine is a managed service letting developers and scientists build their own models and run them in production. This means, you have to build your own model to generate text from videos which needs much effort and experience to build such model. So, it’s not a practical solution for this scenario.</p>
-
-<p><strong>Source(s): </strong></p>
-
-<p>Google NLP: <a href="https://cloud.google.com/natural-language/" target="_blank">https://cloud.google.com/natural-language/</a></p>
-
-<p>Google Machine Learning Engine: <a href="https://cloud.google.com/ml-engine/" target="_blank">https://cloud.google.com/ml-engine/</a></p>
-
-<p>Google Vision API: <a href="https://cloud.google.com/vision" target="_blank">https://cloud.google.com/vision</a></p>
-
-<p>Google Speech-to-Text API: <a href="https://cloud.google.com/speech-to-text/" target="_blank">https://cloud.google.com/speech-to-text/</a></p>
-                        </div>
+></strong>Answer A is incorrect: </strong>Cloud natural language service is to derive insights from unstructured text revealing meaning of the documents and categorize articles. It won’t help extracting captions from videos.
+>
+><strong>Answer B is correct</strong>: Cloud Speech-to-Text is a service to generate captions from videos by detecting speakers language and speech.
+>
+><strong>Answer C is incorrect: </strong>AutoML Vision API is a service to recognize and derive insights from images by either using pre-trained models or training a custom model based on a set of photographics.
+>
+<strong>Answer D is incorrect</strong>: Machine Learning Engine is a managed service letting developers and scientists build their own models and run them in production. This means, you have to build your own model to generate text from videos which needs much effort and experience to build such model. So, it’s not a practical solution for this scenario.
+>
+><strong>Source(s): <a href="https://cloud.google.com/natural-language/" target="_blank">Google NLP</a>, <a href="https://cloud.google.com/ml-engine/" target="_blank">Google Machine Learning Engine</a>, <a href="https://cloud.google.com/vision" target="_blank">Google Vision API</a>, <a href="https://cloud.google.com/speech-to-text/" target="_blank">Google Speech-to-Text API</a>
 
 **1. What is the HBase Shell for Cloud Bigtable?**
 
