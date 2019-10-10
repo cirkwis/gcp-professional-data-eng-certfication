@@ -1,4 +1,31 @@
-**What is the HBase Shell for Cloud Bigtable?**
+**1. A multi-national company wants to unify their data sources by building a universal centralized data warehouse instead of their current architecture in which every branch has its own and branches from other regions cannot access it. They want to build a data analytics team to extract data from all branches and build daily reports and dashboards to visualize the metrics required for C-Level managers to take decisions. The current data warehouses are all MySQL databases and analytics team will use SQL for data reporting. The company is distributed among different continents ( North America, Europe &amp; Asia). Which of the following approach is best suits to satisfy the company’s new data warehouse architecture?**
+
+- **A.** Use Cloud SQL to launch MySQL databases on each region. Enable cross-region read replication for each to sync between different regions.
+- **B.** Use Cloud SQL to launch Multi-regional MySQL databases. Each in North America, Europe and Asia. Enable cross-region read replication for each to sync between different regions.
+- **C.** Use BigQuery as a data warehouse and grant data analytics team editor roles.
+- **D.** Use Cloud Spanner by launching a multi-regional database to be the company’s unified data warehouse.
+
+> **The correct answer is Option D**
+> 
+> Cloud Spanner is a horizontally scalable, strongly consistent, relational database service. It’s built to combine the benefits of relational database structure with non-relational horizontal scale. This delivers high-performance transactions and strong consistency across rows, regions and continents.
+> 
+> <p><strong>Option A is incorrect.</strong> Launching MySQL databases on each region defeats the purpose of having a unified data warehouse.</p>
+> 
+> <p><strong>Option B is incorrect</strong>. Cloud SQL does not support multi-regional databases.</p>
+> 
+> <p><strong>Option C is incorrect</strong>. While BigQuery is a strong and potential alternative, BigQuery does not have horizontal scaling and it only covers USA &amp; Europe (<em>by the time of writing this question</em>). Another drawback is, BigQuery doesn’t support full data manipulation language (DML) and it has limitations on how rows can be updated or deleted.</p>
+> 
+> <p><strong>Option D is correct.</strong> Cloud Spanner is a relational database supports horizontal scaling across continents.</p>
+> 
+> <p><strong>Source(s):</strong></p>
+> 
+> <p>Cloud Spanner: <a href="https://cloud.google.com/spanner/" target="_blank">https://cloud.google.com/spanner/</a></p>
+> 
+> <p>BigQuery dataset locations: <a href="https://cloud.google.com/bigquery/docs/locations" target="_blank">https://cloud.google.com/bigquery/docs/locations</a></p>
+> 
+> <p>Bigquery: Data Manipulation Langauge: <a href="https://cloud.google.com/bigquery/docs/reference/standard-%20sql/data-manipulation-language" target="_blank">https://cloud.google.com/bigquery/docs/reference/standard- sql/data-manipulation-language</a></p>
+  
+**1. What is the HBase Shell for Cloud Bigtable?**
 
 - ~~The HBase shell is a GUI based interface that performs administrative tasks, such as creating and deleting tables.~~
 - The HBase shell is a command-line tool that performs administrative tasks, such as creating and deleting tables.
