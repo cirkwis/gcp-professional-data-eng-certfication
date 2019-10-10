@@ -17,13 +17,30 @@
 > 
 > <p><strong>Option D is correct.</strong> Cloud Spanner is a relational database supports horizontal scaling across continents.</p>
 > 
-> <p><strong>Source(s):</strong></p>
-> 
-> <p>Cloud Spanner: <a href="https://cloud.google.com/spanner/" target="_blank">https://cloud.google.com/spanner/</a></p>
-> 
-> <p>BigQuery dataset locations: <a href="https://cloud.google.com/bigquery/docs/locations" target="_blank">https://cloud.google.com/bigquery/docs/locations</a></p>
-> 
-> <p>Bigquery: Data Manipulation Langauge: <a href="https://cloud.google.com/bigquery/docs/reference/standard-%20sql/data-manipulation-language" target="_blank">https://cloud.google.com/bigquery/docs/reference/standard- sql/data-manipulation-language</a></p>
+> <p><strong>Source(s) :</strong><a href="https://cloud.google.com/spanner/" target="_blank">Cloud Spanner</a>, <a href="https://cloud.google.com/bigquery/docs/locations" target="_blank">BigQuery dataset locations</a>, <a href="https://cloud.google.com/bigquery/docs/reference/standard-%20sql/data-manipulation-language" target="_blank">Bigquery: Data Manipulation Langauge</a></p>
+
+**2. A fast-food chain restaurant wants to detect the different meal photos its customers upload to the different social media platforms tagged with their name in order to know what meals customers like and share the most for better quality analysis. It asks your advice on developing such solution for them.**
+
+**However, they want it to be available and in production the soonest possible because they expect a high activity on their social media pages by the next public holiday which is coming in 2 weeks and marketing team finds it a great opportunity to receive feedback based on what customers say online. What is the best approach for this?**
+
+- A. Use AutoML Vision to build and train the model by using all the training photos you collected from food-chain’s social media pages for better results.
+- B. Use AutoML Vision to build and train the model by using 50-70% of training photos you collected from food-chain’s social media pages while the rest of training set is to test and tune the model.
+- C. Use Dataproc to build the model using SparkML. Use 50-70% of training photos you collected to train the model and the rest to test and tune the model. Deploy the model using Cloud ML Engine.
+- D. Use Cloud ML Engine with TensorFlow to build the model. Use all training photos you collected to train the model. Deploy the model using Cloud ML Engine.
+
+>**The correct answer is Option B**
+>
+>Since you have a very short time to build, train and deploy the model, building your own model can be time-consuming and not in your favor. Google provides a great ML service called AutoML to quickly build models for you. AutoML Vision is one of its products which you can start with a training set as little as a dozen photo samples and AutoML takes care of the rest.
+>
+><strong>Option A is incorrect</strong>. AutoML Vision is the right choice. However, training the model with whole training set is not the right approach in Machine Learning because you ought to test the model before considering it accurate enough for production. Usually, training set is split into 70-30% sets, first for training while the second is for testing and tuning the model’s parameters.
+>
+><strong>Option C is incorrect</strong>. Using any approach other than AutoML can be time-consuming and with such tight deadline, it’s not the best approach.
+>
+><strong>Option D is incorrect</strong>. Using this approach can also be time-consuming and using the whole training set for training is not a best practice as explained before.
+>
+>Thus, the best approach for this scenario is Option B.
+>
+><strong>Source(s) :</strong> <a href="https://cloud.google.com/automl/" target="_blank">Google Cloud AutoML</a>, <a href="https://cloud.google.com/ml-engine/" target="_blank">Cloud Machine Learning Engine</a>
   
 **1. What is the HBase Shell for Cloud Bigtable?**
 
