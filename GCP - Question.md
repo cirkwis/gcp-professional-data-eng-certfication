@@ -74,7 +74,7 @@
   <li>Increase training data, decrease feature parameters &amp; decrease regularization.</li>
 </ol>
 
-> The correct answer is Option C.
+> **The correct answer is Option C.**
 >
 > Overfitting happens when a model performs well on a training dataset, generating only a small error, while giving wrong output for the test dataset. This happens because the model is only picking up specific features input found in the training set instead of picking out general features of the given training set.
 > To solve overfitting, the following would help improving the model's quality: 
@@ -84,6 +84,27 @@
 >
 > From the brief explanation, to solve the overfitting problem in the scenario, you need to choose option C. 
   
+**5. A coach line bus service company wants to predict how many passengers they expect to book for tickets on their buses for the upcoming months. This helps the company to know how many buses they need to be in service for maintenance and fuel and how many drivers to be available. The company has data sets of all booked tickets since its launch in 1968 and it allows private sharing of the data if this helps the prediction process.**
+
+**You will build the machine learning model for the coach line company. Which technique you will use to predict the number of passengers in the next months?**
+
+<ol type="A">
+  <li>Regression</li>
+  <li>Association</li>
+  <li>Classification</li>
+  <li>Clustering</li>
+</ol>
+
+>**Answer: A**
+>
+>A regression problem is a problem which its output variable is of continuous value. Problems which finds out about variables such as weights, prices or age are considered regression problems. A classification problem is a problem which the output variable is a category. Examples of classification problems are finding a passenger’s nationality, detect if a patient is diagnosed with a disease or if an applicant is qualified for a job interview. Regression and classification are supervised learning problems. It means, the machine learns from past experiences by training it on a labeled data set. A training set is a set of rows with input and output parameters. The machine then learns from the training set and improves its parameters for better detection.
+>
+>Association is a rule-learning technique for discovering interesting relations between variables in large data sets. Example of association rules is discovering regularities between products in large-scale transaction data recorded by point-of-sales for a retail chain store.</p>
+>
+>Clustering is an unsupervised learning method. An unsupervised learning is a method to find references between input data without labeled output. The purpose is to find meaningful structure between the input sets with similar features and group them. Clustering is the method of grouping data points share similarities and separating dissimilar points to other groups. Examples of clustering applications are customer segmentation (new, frequent, loyal, ..), city land value and detecting anomalies in network traffic.
+>
+>From the explanation above, the technique to help solving the scenario is Answer A: Regression.
+
 **1. What is the HBase Shell for Cloud Bigtable?**
 
 - ~~The HBase shell is a GUI based interface that performs administrative tasks, such as creating and deleting tables.~~
