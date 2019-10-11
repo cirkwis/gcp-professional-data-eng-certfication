@@ -124,7 +124,7 @@
 >
 ><strong>Answer D is incorrect</strong>: Machine Learning Engine is a managed service letting developers and scientists build their own models and run them in production. This means, you have to build your own model to generate text from videos which needs much effort and experience to build such model. So, it’s not a practical solution for this scenario.
 >
-><strong>Source(s): <a href="https://cloud.google.com/natural-language/" target="_blank">Google NLP</a>, <a href="https://cloud.google.com/ml-engine/" target="_blank">Google Machine Learning Engine</a>, <a href="https://cloud.google.com/vision" target="_blank">Google Vision API</a>, <a href="https://cloud.google.com/speech-to-text/" target="_blank">Google Speech-to-Text API</a>
+>Source(s): <a href="https://cloud.google.com/natural-language/" target="_blank">Google NLP</a>, <a href="https://cloud.google.com/ml-engine/" target="_blank">Google Machine Learning Engine</a>, <a href="https://cloud.google.com/vision" target="_blank">Google Vision API</a>, <a href="https://cloud.google.com/speech-to-text/" target="_blank">Google Speech-to-Text API</a>
 
 **7. An online learning platform wants to generate captions for its videos. The platform offers around 2,500 courses with topics about business, finance, cooking, development &amp; science. The platform allows content with different languages such as French, German, Turkish and Thai. Thus, this can be very difficult for a single team to caption all available courses and they are looking for an approach which helps do such massive job. Which product from Google Cloud will you suggest them to use?**
 
