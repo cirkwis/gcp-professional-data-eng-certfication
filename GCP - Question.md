@@ -164,7 +164,7 @@
 >
 ><strong>Answer B is incorrect</strong>: Dataproc is unnecessary in this scenario. <strong>Answer D is incorrect:</strong> This solution is viable, but Answer C has a better and more efficient design.</p>
 >
-><strong>Source(s): <a href="https://cloud.google.com/composer/" target="_blank">Cloud Composer</a></p>
+>Source(s): <a href="https://cloud.google.com/composer/" target="_blank">Cloud Composer</a></p>
 
 **9. A dairy products company is using sensors installed around different areas in its farms to monitor employees activities and detect any intruders. Apache Kafka cluster is used to gather the events coming from sensors. Recently, Kafka cluster is becoming a bottleneck causing lag in receiving sensor events. Turns out sensors are sending more frequent events and due to the company expanding with more farms, more sensors are installed and this will cause extra load on the cluster. What is the most resilient approach to solve this issue?**
 
@@ -184,6 +184,268 @@
 ><strong>Answer D is wrong</strong> because Dataflow cannot ingest event streams. It needs Pub/Sub service to do so.</p>
 >
 ><strong>Source(s): </strong><a href="https://cloud.google.com/pubsub/docs/overview" target="_blank">Google Pub/Sub</a></p>
+
+<strong>10. A social media platform stores various details of their platform users such as session login time, URLs visited, activities on platform and other logs. With GDPR (General Data Protection Regulation) compliance to be officially implemented, the platform now allows users to download their activity logs from their profile settings which they can click a button to call an API to generate a full report.
+
+Recently, users are complaining timeouts after 60 seconds of requesting to download their activity logs at peak hours when the platform has the most traffic. They have to try for several minutes or even hours for the API to return their report available for download.
+
+How can you solve this issue?</strong>
+
+<ol type="A">
+  <li>Increase timeout for API at peak times to 120 seconds. If it keeps failing, try increasing the timeout until the issue is resolved.</li>
+  <li>Build a Dataflow pipeline to generate daily reports of users’ activity logs. Users can download those daily reports whenever they want to.</li>
+  <li>Migrate data source to Cloud Spanner for horizontal scaling to avoid query timeouts.</li>
+  <li>Use Pub/sub to pull the requests for activity logs from users. Send a link to users by their email addresses with a temporary download link for them to access their report.</li>
+</ol>
+
+>**Answer: D**
+>
+>Cloud Pub/Sub is a service to ingest event streams at any scale. It’s scalable and reliable for stream analytics and event-driven computing systems.
+>
+>Pub/sub is a good product to de-couple a system’s components so they communicate with each other asymmetrically. From the scenario shown here, instead of directly calling the API to export required report which puts great loads on the API and hence the timeouts faced by users. Instead, the platform can “publish” messages to a “topic” related to exporting activity log reports sending the required parameters such as user ID and custom settings such as date range and what data to export. The API can be switched to be a “subscriber” which receives the messages sent and processes each message asymmetrically to generate the report, then sends the download link to the user’s mailbox when ready.
+>
+>Hence, answer D is correct.
+>
+><strong>Answer A is incorrect</strong>: Increasing timeout isn’t a scalable solution and it may keep occurring eventually when more and more users join the platform.
+>
+><strong>Answer B is incorect</strong>: While this would solve the timeout issues, generating daily reports for users can be costly as more users join, knowing that requesting activity log reports are a non-frequent action and this costs both compute and storage resources. This solution also doesn’t provide flexibility with what parameters the report is generated on such as date range and other custom metrics.</p>
+>
+><strong>Answer C is incorrect: </strong>This solution has several issues. First, we’re assuming the data source is a relational database, which can be unlikely since NoSQL databases better perform for massive log input which uses the user ID as a key to reach the data. Second, Cloud Spanner isn’t a cheap solution for a service not frequently used.</p>
+
+**11. A company decides to migrate its on-premise data infrastructure to the cloud mainly for high availability of cloud services and to lower the high costs of storing data on-premise. The infrastructure uses HDFS to store data and be processed and transformed using Apache Hive &amp; Spark. The company wants to migrate the infrastructure and DevOps team still wants to administrate the infrastructure in the cloud. As a data architect, which of the following is the approach recommended by Google?**
+
+<ol type="A">
+  <li>Use Dataproc to process the data. Store data in Google Storage.</li>
+  <li>Build a Dataflow pipeline. Store the data in Google Storage. Use Cloud Compute to launch instances and install the required dependencies for processing the data.</li>
+  <li>Use Dataproc to process the data. Store data in Dataproc’s HDFS.</li>
+  <li>Build a Dataflow pipeline. Store the data in persistent disks in HDFS. Execute the code in Spark framework provided by Dataflow</li>
+</ol>
+
+>**Answer: A**
+>
+>Dataproc is cloud-native Apache Hadoop &amp; Apache Spark service. Dataproc is a fully-managed service from Google to run Apache Hadoop &amp; Spark clusters. Dataflow is a simplified streaming/batching data processing service. With Apache Beam, it provides rich set of windowing and session analysis primitives as well as an ecosystem of source &amp; sink connectors.
+>
+><strong>Answer B is incorect:</strong> Dataflow is serverless which may not suit DevOps requirement to fully manage the pipeline and it’s unnecessary to use Cloud Compute for installing dependencies. <strong>Answer C is incorrect:</strong> Dataproc’s HDFS is volatile, means it will be removed when the cluster is deleted. Dataproc clusters can be kept up indefinitely but this may lead to high costs which defeats the purpose of migration.
+>
+><strong>Answer D</strong>: In addition to what discussed in answer B, storing data using persistent disks can be only accessible by Compute engines and it’s more expensive than storing in Google Storage.
+>
+>Answer A fulfills the requirements for migrating the on-premise infra to the cloud with high availability, minimum costs and full control by DevOps.
+
+**12. A multi-international company has multiple Google Storage buckets in different regions around the world. Each branch has its own set of buckets in the region nearest to them to avoid latencies. However, this led to a problem for analytics team to reach and do the necessary reports on the data using BigQuery since they need to create the tables in the same region either to import the data or create external tables to access the data in different regions. The head of data decided to sync the data daily from different Google Storage buckets scattered in different regions to a single multi-regional bucket to do the necessary data analysis and reporting. Which service could help with this approach?**
+
+<ol type="A">
+  <li>Appliance Transfer Service</li>
+  <li>gsutil</li>
+  <li>Storage Transfer Service</li>
+  <li>Dataflow</li>
+</ol>
+
+>**Answer: C**
+>
+>Storage Transfer Service allows you to quickly import <em>ONLINE </em>data into Cloud Storage. You can also set up a repeating schedule for transferring data, as well as transfer data within Cloud Storage, from one bucket to another.
+>
+>Transfer Appliance is an <em>OFFLINE </em>secure, high capacity storage server that you set up in your datacenter. You fill it with data and ship it to an ingest location where the data is uploaded to Google Cloud Storage.
+>
+>So, answer C is correct, while answer <strong>A is incorrect.</strong></p>
+>
+><strong>Answer B is incorrect: </strong>gsutil tool is good for programmatic usage by developers and may be useful to copy and move megabytes/gigabytes of data not so practical for Terabytes of data. It’s also not reliable data transfer technique as it is related to the machine’s connectivity with Google Cloud.</p>
+>
+><strong>Answer D is incorrect:</strong> Dataflow as a solution may be viable, but you need to build a pipeline to migrate data from bucket to another. Storage Transfer Service can do it without the extra effort.
+>
+><strong>Source(s) :</strong> <a href="https://cloud.google.com/storage-transfer/docs/" target="_blank">Google Cloud Storage Transfer Service</a>, <a href="https://cloud.google.com/transfer-appliance/" target="_blank">Google Appliance Transfer Service</a>
+
+**13. A company is migrating its current infrastructure from on-premise to Google cloud. It stores over 280TB of data on its on-premise HDFS servers. You were tasked to move data from HDFS to Google Storage in a secure and efficient manner. Which of the following approaches are best to fulfill this task?**
+
+<ol type="A">
+  <li>Install Google Storage gsutil tool on servers and copy the data from HDFS to Google Storage.</li>
+  <li>Use Cloud Data Transfer Service to migrate the data to Google Storage.</li>
+  <li>Import the data from HDFS to BigQuery. Then, export the data to Google Storage in AVRO format.</li>
+  <li>Use Transfer Appliance Service to migrate the data to Google Storage.</li>
+</ol>
+
+>**Answer: D**
+>
+>Storage Transfer Service allows you to quickly import <em>ONLINE </em>data into Cloud Storage. You can also set up a repeating schedule for transferring data, as well as transfer data within Cloud Storage, from one bucket to another.
+>
+>Transfer Appliance is an <em>OFFLINE </em>secure, high capacity storage server that you set up in your datacenter. You fill it with data and ship it to an ingest location where the data is uploaded to Google Cloud Storage.
+>
+>So, answer D is the correct one, while<strong> B is incorrect.</strong>
+>
+><strong>Answer A is incorrect:</strong> gsutil tool is good for programmatic usage by developers and may be useful to copy and move megabytes/gigabytes of data. Not so practical for Terabytes of data. It’s also not reliable data transfer technique as it is related to the machine’s connectivity with Google Cloud.
+>
+><strong>Answer C is incorrect</strong>: In order to migrate to BigQuery, you need to migrate data to Google Storage. This is a useless approach as the main challenge is migrating data from HDFS to Google Storage and BigQuery won’t help solving it.</p>
+>
+><strong>Source(s):</strong> <a href="https://cloud.google.com/storage-transfer/docs/" target="_blank">Google Cloud Storage Transfer Service</a>, <a href="https://cloud.google.com/transfer-appliance/" target="_blank">Google Appliance Transfer Service</a>, <a href="https://cloud.google.com/solutions/migration/hadoop/hadoop-gcp-%20migration-data" target="_blank">Migrate HDFS to Google Storage</a>. 
+
+**14. A company is moving its data center from its on-premise servers to the cloud. It was estimated that they have about 2 Petabytes of data to be moved and security team is very concerned the data should be migrated securely and project manager has a timeline of 6 months for the whole migration to be done. Which of the following approaches is best to do the job?**
+
+<ol type="A">
+  <li>Appliance Transfer Service.</li>
+  <li>Google Storage (Coldline).</li>
+  <li>Cloud Transfer Service.</li>
+  <li>Datastore</li>
+</ol>
+
+>**Answer: A**
+>
+>Storage Transfer Service allows you to quickly import <em>ONLINE </em>data into Cloud Storage. You can also set up a repeating schedule for transferring data, as well as transfer data within Cloud Storage, from one bucket to another.
+>
+>Transfer Appliance is an <em>OFFLINE </em>secure, high capacity storage server that you set up in your datacenter. You fill it with data and ship it to an ingest location where the data is uploaded to Google Cloud Storage.
+>
+>So, answer A is the correct one, while<strong> C is incorrect.</strong>
+>
+><strong>Answer B is incorrect: </strong>Google Storage Coldline is a way to store archive data not frequently accessed cheaply in the cloud. It won’t help migrating data to the cloud.
+>
+><strong>Answer D is incorrect:</strong> Datastore is a NoSQL database built for automatic scaling and high performance. It won’t help with this scenario.
+>
+><strong>Source(s):</strong> <a href="https://cloud.google.com/storage-transfer/docs/" target="_blank">Google Cloud Storage Transfer Service</a>, <a href="https://cloud.google.com/transfer-appliance/" target="_blank">Google Appliance Transfer Service</a>, <a href="https://cloud.google.com/solutions/migration/hadoop/hadoop-gcp-%20migration-data" target="_blank">Migrate HDFS to Google Storage</a>, <a href="https://cloud.google.com/storage/docs/storage-classes" target="_blank">Google Storage Classes</a>
+
+**15. You have the following legacy SQL query in BigQuery:**
+
+```SQL
+# legacy SQL
+SELECT order_date, 
+    COUNT(DISTINCT customer_id)) AS customers
+FROM [my-project:orders.orders_2018]
+GROUP BY order_date
+ORDER BY order_date:
+```
+
+**How can you convert this query to standard SQL?**
+
+<ol type="A">
+  <li>Change table syntax to `my-project:orders.orders_2018`</li>
+  <li>Change table syntax to `my-project.orders.orders_2018`</li>
+  <li>Change table syntax to [my-project.orders.orders_2018]</li>
+  <li>No change required. This works fine if standard SQL is enabled.</li>
+</ol>
+
+>**Answer: B**
+>
+>Source: <a href="https://cloud.google.com/bigquery/docs/reference/standard-%20sql/migrating-from-legacy-sql%23subqueries_in_more_places" target="_blank">Migrating from Legacy to Standard SQL</a>
+
+**16. What is the keyword in BigQuery standard SQL used when selecting from multiple tables with wildcard by their suffices?** 
+
+<ol type="A">
+  <li>_WILDCARD_SUFFIX</li>
+  <li>_TABLES_SUFFIX</li>
+  <li>_SUFFIX</li>
+  <li>_TABLE_SUFFIX</li>
+</ol>
+
+>**Answer: D**
+>
+>To restrict the query so that it scans an arbitrary set of tables, use the <em>_TABLE_SUFFIX </em>pseudo column in the WHERE clause. The <em>_TABLE_SUFFIX </em>pseudo column contains the values matched by the table wildcard.
+>
+>Source: <a href="https://cloud.google.com/bigquery/docs/querying-wildcard-tables" target="_blank">Bigquery – Querying wildcard tables</a>
+
+**17. You have the following BigQuery legacy SQL query :**
+
+```SQL
+SELECT SUM (amount)
+FROM TABLE_DATE_RANGE ([some-dataset.orders_],
+    TIMESTAMP (‘2017-06-01’),
+    TIMESTAMP (‘2017-09-01’);
+```
+
+**How can you convert it to standard SQL?**
+
+A. 
+```SQL
+SELECT SUM(amount)
+FROM `some-dataset.orders_*`
+    WHERE TABLE_DATE_RANGE BETWEEN ‘20170601’ AND ‘20170901’;
+```
+B. 
+```SQL
+SELECT SUM(amount)
+FROM `some-dataset.orders_*`
+    WHERE _TABLE_SUFFIX BETWEEN ‘20170601’ AND ‘20170901’;
+```
+C. 
+```SQL
+SELECT SUM(amount)
+FROM `some-dataset.orders_`
+    WHERE _TABLE_SUFFIX BETWEEN ‘20170601’ AND ‘20170901’;
+```
+D. 
+```SQL
+SELECT SUM(amount)
+FROM `some-dataset.orders_*`
+    WHERE _TABLE_DATE_RANGE BETWEEN ‘20170601’ AND ‘20170901’;
+```
+
+>**Answer: B**
+>
+>To restrict the query so that it scans an arbitrary set of tables, use the <em>_TABLE_SUFFIX </em>pseudo column in the WHERE clause. The <em>_TABLE_SUFFIX </em>pseudo column contains the values matched by the table wildcard.
+>
+>TABLE_DATE_RANGE queries daily tables that overlap with the time range between <em> </em>and . This function is a <em>LEGACY </em>SQL function.
+
+**18. A weather forecasting facility receives events from its 25,000 sensors every 10 seconds. Those events are stored in Google Storage in JSON format. Events can have different attributes based on purpose, location and brand. Data Science team wants to apply their SQL-queries on this data for further transformation and forecasting analysis. Which of the following approaches is best to satisfy Data Scientists request?**
+
+<ol type="A">
+  <li>Load the data directly to BigQuery with enabling “auto-detect” option.</li>
+  <li>Build a dataflow pipeline to read JSON data and transform it to a structured format like CSV. Then, load the data to BigQuery.</li>
+  <li>Import the data to BigTable. Choose combination #eventType-location-brand to differentiate between different events.</li>
+  <li>Use Dataproc cluster and create Hive external clusters on the data for data scientists to query data.</li>
+</ol>
+
+>**Answer: A**
+>
+>Description:
+>
+>Schema auto-detection: Schema auto-detection is available when you load data into BigQuery, and when you query an external data source. When auto-detection is enabled, BigQuery starts the inference process by selecting the file in the data source and scanning up to 100 rows of data to use as a representative sample. BigQuery then examines each field and attempts to assign a data type to that field based on the values in the sample. BigQuery makes a best-effort attempt to automatically infer the schema for CSV and JSON files.
+>
+>So, answer A is the correct answer. The other answers are complicated and unnecessary approaches for this scenario.
+>
+><p><strong>Source: </strong><a href="https://cloud.google.com/bigquery/docs/schema-detect" target="_blank">BigQuery – Auto-detect schema</a></p>
+
+**19. An environment safety facility receives thousands of events every 60 seconds from its sensors assembled in different sectors monitoring air pollution in the region. Scientists want to access and query the data for observation and daily reporting. Due to current funding state, their budget is limited and they seek a cost-effective, highly available and ACID-compliant solution supports SQL querying. Which approach would you recommend for such scenario?**
+
+<ol type="A">
+  <li>Use BigQuery to store and query the event data. Enable streaming on BigQuery for data to be loaded in real-time.</li>
+  <li>Batch-load data into BigTable with launching 10 nodes to allow high performance.</li>
+  <li>Use Cloud SQL to load events into a relational database and allow access to scientists to query.</li>
+  <li>Use BigQuery to store and query event data. Batch load the data to BigQuery using its API.</li>
+</ol>
+
+>**Answer: D**
+>
+>BigQuery supports both batch &amp; streaming data. However, due to mentioned budget restrictions, the solution would choose the cheaper approach, which is batching data to BigQuery. Batching data to BigQuery is free of charge. Streaming data on the other hand is charged by size.</p>
+>
+>So, answer D is correct. <strong>Answer A is incorrect </strong>for this scenario. <strong>Answer B is incorrect</strong>: BigTable does not support SQL querying.
+>
+><strong>Answer C is incorrect</strong>: Cloud SQL needs administration and not easily scalable. Cloud SQL does not provide batching tools. BigQuery is a better approach for such scenario.
+>
+><strong>Source(s) :</strong><a href="https://cloud.google.com/bigquery/streaming-data-into-bigquery" target="_blank">Bigquery: Streaming data</a>, <a href="https://cloud.google.com/bigquery/batch" target="_blank">Bigquery: Batch data</a>, <a href="https://cloud.google.com/bigquery/pricing" target="_blank">Bigquery Pricing</a>
+
+**20. Analytics team receives data from different data sources stored in Google Storage. The team wants to query the data for required ETL operations which they will fully take care of it using SQL. They want your advice on what is the best approach recommended by Google to do it. What would you suggest?**
+
+<ol type="A">
+  <li>Batch load the data from Google Storage into BigQuery using its batch API, run cleansing and transformation queries on data and insert the transformed rows to another BigQuery table.</li>
+  <li>Batch load the data from Google Storage into BigQuery using its batch API, run cleansing and transformation queries on data and export the data to Google Storage. Launch Dataproc cluster and use Hive to query the transformed data.</li>
+  <li>Create external tables on data using BigQuery, apply the cleansing and transformation queries on data then load the output to an internal BigQuery table for reporting and visualization.</li>
+  <li>Create external tables on data using BigQuery, apply the cleansing and transformation queries on data then load the output to BigTable for reporting and visualization.</li>
+</ol>
+
+>**Answer: C**
+>
+>An external data source (also known as a federated data source) is a data source that you can query directly even though the data is not stored in BigQuery. Instead of loading or streaming the data, you create a table that references the external data source.
+>
+>Querying an external data source using a temporary table is useful for one-time, ad-hoc queries over external data, or for extract, transform, and load (ETL) processes.
+>
+>In summary, using external tables in BigQuery is useful for such cases:
+>- Perform ETL operations on data.
+>- Frequently changed data.
+>- Data is being ingested periodically.
+>
+><strong>Answer C is the correct answer</strong> based on above explanation and using BigQuery for reporting and visualization is a better approach.
+>
+><strong>Answer D is incorrect</strong> because BigTable isn’t a practical (and cheap) approach to report and visualize data.
+>
+><strong>Answers A &amp; B are incorrect</strong>: Based on Google’s best practices, using external tables for ETL is better than loading data to BigQuery.
+>
+><strong>Source(s) :</strong><a href="https://cloud.google.com/bigquery/external-data-sources" target="_blank">BigQuery external tables</a>, <a href="https://cloud.google.com/bigquery/external-table-definition" target="_blank">BigQuery – Define external tables</a></p>
 
 **1. What is the HBase Shell for Cloud Bigtable?**
 
