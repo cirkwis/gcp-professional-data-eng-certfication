@@ -166,6 +166,25 @@
 >
 ><strong>Source(s): <a href="https://cloud.google.com/composer/" target="_blank">Cloud Composer</a></p>
 
+**9. A dairy products company is using sensors installed around different areas in its farms to monitor employees activities and detect any intruders. Apache Kafka cluster is used to gather the events coming from sensors. Recently, Kafka cluster is becoming a bottleneck causing lag in receiving sensor events. Turns out sensors are sending more frequent events and due to the company expanding with more farms, more sensors are installed and this will cause extra load on the cluster. What is the most resilient approach to solve this issue?**
+
+<ol type="A">
+  <li>Use pub/sub to ingest and stream sensor events.</li>
+  <li>Scale out Kafka cluster to withstand the continuously flowing event stream.</li>
+  <li>Spin up a new Kafka cluster and distribute sensors even streams between the two clusters.</li>
+  <li>Build a Dataflow pipeline to ingest the events stream.</li>
+</ol>
+
+>**Answer: A**
+>
+>Cloud Pub/Sub is a service to ingest event streams at any scale. It’s scalable and reliable for stream analytics and event-driven computing systems. So it’s the most reliable Google product for such scenario.</p>
+>
+><strong>Answers B &amp; C are wrong</strong> because these are not scalable solutions.</p>
+>
+><strong>Answer D is wrong</strong> because Dataflow cannot ingest event streams. It needs Pub/Sub service to do so.</p>
+>
+><strong>Source(s): </strong><a href="https://cloud.google.com/pubsub/docs/overview" target="_blank">Google Pub/Sub</a></p>
+
 **1. What is the HBase Shell for Cloud Bigtable?**
 
 - ~~The HBase shell is a GUI based interface that performs administrative tasks, such as creating and deleting tables.~~
