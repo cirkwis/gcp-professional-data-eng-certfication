@@ -145,7 +145,26 @@
 >
 ><strong>Answer D is incorrect</strong>: AutoML Vision API is a service to recognize and derive insights from images by either using pre-trained models or training a custom model based on a set of photographics.</p>
 >
-><strong>Source(s): <a href="https://cloud.google.com/natural-language/" target="_blank">Google NLP</a>, <a href="https://cloud.google.com/ml-engine/" target="_blank">Google Machine Learning Engine</a>, <a href="https://cloud.google.com/vision" target="_blank">Google Vision API</a>, <a href="https://cloud.google.com/speech-to-text/" target="_blank">Google Speech-to-Text API</a>
+>Source(s): <a href="https://cloud.google.com/natural-language/" target="_blank">Google NLP</a>, <a href="https://cloud.google.com/ml-engine/" target="_blank">Google Machine Learning Engine</a>, <a href="https://cloud.google.com/vision" target="_blank">Google Vision API</a>, <a href="https://cloud.google.com/speech-to-text/" target="_blank">Google Speech-to-Text API</a>
+
+**8. You have a dataflow pipeline reads a CSV file daily at 6am, applies the needed cleansing &amp; transformation on it, then loads it to BigQuery. Occassionally, the CSV file might be modified within the day due to human error or incomplete data. This causes you to manually re-run dataflow pipeline again. Is there a way to fix this by automatically re-run the pipeline if file has been modified?**
+
+<ol type="A">
+  <li>Use Cloud Scheduler to re-run dataflow after 6am. Check what is the average time the file is modified and schedule based on it</li>
+  <li>Use Dataproc to reprocess the file after 6am. You can use Cloud Functions to launch a Dataproc cluster.</li>
+  <li>Use Cloud Composer to rerun dataflow and reprocess the file. Create a custom sensor to detect file condition if changed.</li>
+  <li>Use a compute engine to schedule a cron job to run every 10 minutes to check if the file was modified to rerun dataflow.</li>
+</ol>
+
+>Answer: C
+>
+><p>Cloud Composer is a fully managed workflow orchestration service built on Apache Airflow. Cloud composer is built specifically to schedule and monitor workflows and take required actions. You can use Cloud Composer to orchestrate dataflow pipeline and create a custom sensor to detect file’s condition if any changes occurred, then it triggers the dataflow pipeline to run again.</p>
+>
+><strong>Answer A is incorrect</strong>: Guessing what time scheduler should rerun dataflow is not efficient.</p>
+>
+><strong>Answer B is incorrect</strong>: Dataproc is unnecessary in this scenario. <strong>Answer D is incorrect:</strong> This solution is viable, but Answer C has a better and more efficient design.</p>
+>
+><strong>Source(s): <a href="https://cloud.google.com/composer/" target="_blank">Cloud Composer</a></p>
 
 **1. What is the HBase Shell for Cloud Bigtable?**
 
