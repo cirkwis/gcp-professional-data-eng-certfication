@@ -497,4 +497,35 @@ FROM `some-dataset.orders_*`
 >
 ><strong>Source(s): </strong><a href="https://cloud.google.com/bigtable/docs/choosing-ssd-hdd" target="_blank">Choosing SSD vs HDD for BigTable</a>
 
-****
+**24. You are building a data pipeline on GCP. You need to select services that will host a deep neural network machine learning model also hosted on GCP. You also need to monitor and run jobs that could occasionally fail. What should you do?**
+
+<ol type="A">
+  <li>Use the Cloud Machine Learning Engine to host your model. Monitor the status of the Jobs object for 'failed' job states.</li>
+  <li>Use the Cloud Machine Learning Engine to host your model. Monitor the status of the Operation object for 'error' results</li>
+  <li>Use a Kubernetes Engine cluster to host your model. Monitor the status of the Jobs object for 'failed' job states.</li>
+  <li>Use a Kubernetes Engine cluster to host your model. Monitor the status of the Operation object for 'error' results.</li>
+</ol>
+
+>**Answer: A**
+>
+>You would host your model and correctly monitor Jobs for failures with Cloud ML Engine. Using Kubernetes Engine is a choice but it's not the optimal solution while having Cloud ML Engine.  
+
+**25. You are designing storage for event data as part of building a data pipeline on GCP. You want to minimize the cost of querying individual values over time windows. Which storage service and schema design should you use?**
+
+<ol type="A">
+  <li>Use Cloud Bigtable for storage. Design tall and narrow tables, and use a new row for each single event version.</li>
+  <li>Use Cloud Bigtable for storage. Design short and wide tables, and use a new column for each single event version.</li>
+  <li>Use Cloud Storage for storage. Join the raw file data with a BigQuery log table.</li>
+  <li>Use Cloud Storage for storage. Write a Cloud Dataprep job to split the data into partitioned tables.</li>
+</ol>
+
+>**Answer: A**
+>
+>A tall and narrow table has a small number of events per row, which could be just one event, whereas a short and wide table has a large number of events per row. As explained in a moment, tall and narrow tables are best suited for time-series data.
+>
+>For example, suppose you take the temperature in your vegetable garden each morning. Now if you decide that, because you take the temperature each morning, one row per day is appropriate; as a result, your table is tall and narrow. Note that the timestamp isn't the first element of the row key. As explained later, using a timestamp as the first element of a row key can cause a variety of problems. 
+>
+>**For time series, you should generally use tall and narrow tables**. This is for two reasons: Storing one event per row makes it easier to run queries against your data. Storing many events per row makes it more likely that the total row size will exceed the recommended maximum.
+>
+>**As an optimization, you can use short and wide tables, but avoid unbounded numbers of events**. For example, if you usually need to retrieve an entire month of events at once, the temperature table above is a reasonable optimization—the row is bounded in size to the number of days in a month.
+
