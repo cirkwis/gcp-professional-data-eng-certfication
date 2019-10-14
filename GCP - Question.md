@@ -626,4 +626,15 @@ FROM `some-dataset.orders_*`
 >
 >By default, pre-emptible node disk sizes are limited to 100GB or the size of the non-preemptible node disk sizes, whichever is smaller. However you can override the default preemptible disk size to any requested size. Since the majority of our cluster is using preemptible nodes, the size of the disk used for caching operations will see a noticeable performance improvement using a larger disk. Also, SSD's will perform better than HDD. This will increase costs slightly, but it's the best option available while maintaining costs. 
 >
->**E is incorrect**. While the block size of parquet files does have an impact on performance in a complex Spark job, these are the same jobs and configurations that were run on the on-premises Hadoop cluster. The change in performance in two different environments with identical job configurations does not indicate a job configuration or file format issue. 
+>**E is incorrect**. While the block size of parquet files does have an impact on performance in a complex Spark job, these are the same jobs and configurations that were run on the on-premises Hadoop cluster. The change in performance in two different environments with identical job configurations does not indicate a job configuration or file format issue. .
+
+**34. You are creating a machine learning model for predicting a person's income given a variety of factors such as age, race, occupation, and others. What type of problem are we trying to solve in our prediction values?**
+
+<ol type="A">
+  <li>Classification</li>
+  <li>Unsupervised learning</li>
+  <li>Clustering</li>
+  <li>Linear Regression</li>
+</ol>
+
+>**Answer: D**
