@@ -496,3 +496,5 @@ FROM `some-dataset.orders_*`
 >For example, if you plan to store extensive historical data for a large number of remote-sensing devices and then use the data to generate daily reports, the cost savings for HDD storage may justify the performance tradeoff. On the other hand, if you plan to use the data to display a real-time dashboard, it probably would not make sens to use HDD storage, reads would be much more frequent in this case, and reads are much slower with HDD storage. 
 >
 ><strong>Source(s): </strong><a href="https://cloud.google.com/bigtable/docs/choosing-ssd-hdd" target="_blank">Choosing SSD vs HDD for BigTable</a>
+
+****
