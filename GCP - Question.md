@@ -529,3 +529,36 @@ FROM `some-dataset.orders_*`
 >
 >**As an optimization, you can use short and wide tables, but avoid unbounded numbers of events**. For example, if you usually need to retrieve an entire month of events at once, the temperature table above is a reasonable optimization—the row is bounded in size to the number of days in a month.
 
+**26. How can you set up your Dataproc environment to use BigQuery as an input and output source?**
+
+<ol type="A">
+  <li>Use the Bigtable syncing service built into Dataproc.</li>
+  <li>Manually use a Cloud Storage bucket to import and export to and from both BigQuery and Dataproc.</li>
+  <li>You can only use Cloud Storage or HDFS for your Dataproc input and output.</li>
+  <li>Install the BigQuery connector on your Dataproc cluster.</li>
+</ol>
+
+>**Answer: D**
+
+**27. What is the difference between a deep and wide neural network? What would you use a deep AND wide neural network for?**
+
+<ol type="A">
+  <li>Wide models are used for generalizations. Deep models are for memorization.</li>
+  <li>Deep and wide models are ideal for solving regression problems.</li>
+  <li>Wide models are used for memorization. Deep models are for generalization</li>
+  <li>Deep and wide models are ideal for a recommendation application.</li>
+</ol>
+
+>**Answer: CD**
+![Deep and wide neural networks](./image/6-6.JPG "Deep and wide neural networks")
+
+**28. You need to run analytical queries using SQL syntax against data formatted in JSON format. What should you do? Choose the best answer.**
+
+<ol type="A">
+  <li>Load your JSON data into Cloud SQL, and run queries against it in that service.</li>
+  <li>Load your JSON data into Cloud Storage. Add your JSON table as an external read source in BigQuery, since BigQuery is unable to store data in JSON format.</li>
+  <li>Import the data into Bigtable and use Bigtable for your queries.</li>
+  <li>Import the data in JSON format into BigQuery as a table, and run queries against it.</li>
+</ol>
+
+>**Answer: D**
