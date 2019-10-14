@@ -447,7 +447,14 @@ FROM `some-dataset.orders_*`
 >
 ><strong>Source(s) :</strong><a href="https://cloud.google.com/bigquery/external-data-sources" target="_blank">BigQuery external tables</a>, <a href="https://cloud.google.com/bigquery/external-table-definition" target="_blank">BigQuery – Define external tables</a></p>
 
-**1. What is the HBase Shell for Cloud Bigtable?**
+**21. What is the HBase Shell for Cloud Bigtable?**
+
+<ol type="A">
+  <li>The HBase shell is a GUI based interface that performs administrative tasks, such as creating and deleting tables.</li>
+  <li>The HBase shell is a command-line tool that performs administrative tasks, such as creating and deleting tables.</li>
+  <li>The HBase shell is a hypervisor based shell that performs administrative tasks, such as creating and deleting new virtualized instances.</li>
+  <li>The HBase shell is a command-line tool that performs only user account management functions to grant access to Cloud Bigtable instances.</li>
+</ol>
 
 - ~~The HBase shell is a GUI based interface that performs administrative tasks, such as creating and deleting tables.~~
 - The HBase shell is a command-line tool that performs administrative tasks, such as creating and deleting tables.
