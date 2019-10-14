@@ -562,3 +562,68 @@ FROM `some-dataset.orders_*`
 </ol>
 
 >**Answer: D**
+
+**29. You are configuring your Cloud Pub/Sub subcription. Assuming that all requirements are met, which subcription delivery method offers better 'near real-time' delivery of messages?**
+
+<ol type="A">
+  <li>Pull</li>
+  <li>Push</li>
+  <li>Cached</li>
+  <li>Instant</li>
+</ol>
+
+>**Answer: B**
+>
+>Pub/Sub can either **push** messages to subcribers, or subscribers can **pull** messages from Pub/Sub;
+>- Push = lower latency, more real-time
+>- Push subcribers must be Webhook endpoints that accept POST over HTTPS
+>- Pull ideal for large volumne of messages - batch delivery
+
+**30. You want to export your Cloud SQL Tables into BigQuery for analysis. How can you do this?**
+
+<ol type="A">
+  <li>Convert your Cloud SQL data to JSON format, then import directly into BigQuery</li>
+  <li>Export your Cloud SQL data to Cloud Storage, then import into BigQuery</li>
+  <li>Import data from BigQuery directly from Cloud SQL.</li>
+  <li>Use the BigQuery export function in Cloud SQL to manage exporting data into BigQuery.</li>
+</ol>
+
+>**Answer: B**
+
+**31. You are setting up Cloud Dataproc to perform some data transformations using Apache Spark jobs. The data will be used for a new set of non-critical experimentations in your marketing group. You want to setup a cluster that can transform a large amount of data in the most cost-effective way. What should you do?**
+
+<ol type="A">
+  <li>Set up a cluster in High Availability mode with default machine types. Add 10 additional Preemptible worker nodes.</li>
+  <li>Set up a cluster in Standard mode with high-memory machine types. Add 10 additional Preemptible worker nodes.</li>
+  <li>Set up a cluster in Standard mode with the default machine types. Add 10 additional local SSDs.</li>
+  <li>Set up a cluster in High Availability mode with high-memory machine types. Add 10 additional local SSDs.</li>
+</ol>
+
+>**Answer: B**
+
+**32. Your organization needs to be able to reliably handle ever-increasing amounts of streaming telemetry data, process it, and economically store analyzed data. What services should they use for this task?**
+
+<ol type="A">
+  <li>Stackdriver, Cloud Dataproc, Cloud Spanner.</li>
+  <li>Cloud Pub/Sub, Cloud Dataproc, Bigtable.</li>
+  <li>Cloud Pub/Sub, Cloud Dataflow, Bigquery.</li>
+  <li>Kubernetes Engine, Cloud Dataflow, Cloud Datastore.</li>
+</ol>
+
+>**Answer: C**
+
+**33. You are migrating a Hadoop cluster to Cloud Dataproc using GCS for storage. After migration, some of your existing, more complex Spark jobs (in parquet format) are performing noticably worse than your on-premises cluster. You are using mostly preemptible VM's (with a few required nonpreemptible) in order to save on costs.**
+
+<ol type="A">
+  <li>Change your file format to CSV format</li>
+  <li>Increase the size of your cluster by twice as many preemptible VM's</li>
+  <li>Switch disks from HDD to SSD. Change the default preemptible VM settings to increase the size of the boot disk.</li>
+  <li>Switch your disks from HDD to SSD, run the job in HDFS before copying the results back to GCS.</li>
+  <li>Ensure that your parquet files are at an optimized block size.</li>
+</ol>
+
+>**Answer: C**
+>
+>By default, pre-emptible node disk sizes are limited to 100GB or the size of the non-preemptible node disk sizes, whichever is smaller. However you can override the default preemptible disk size to any requested size. Since the majority of our cluster is using preemptible nodes, the size of the disk used for caching operations will see a noticeable performance improvement using a larger disk. Also, SSD's will perform better than HDD. This will increase costs slightly, but it's the best option available while maintaining costs. 
+>
+>**E is incorrect**. While the block size of parquet files does have an impact on performance in a complex Spark job, these are the same jobs and configurations that were run on the on-premises Hadoop cluster. The change in performance in two different environments with identical job configurations does not indicate a job configuration or file format issue. 
