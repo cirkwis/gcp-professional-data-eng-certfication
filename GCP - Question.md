@@ -638,3 +638,139 @@ FROM `some-dataset.orders_*`
 </ol>
 
 >**Answer: D**
+
+**35. What is the recommended minimum amount of data to store in BigTable?**
+
+<ol type="A">
+  <li>500 GB</li>
+  <li>1 GB</li>
+  <li>10 TB</li>
+  <li>500 TB</li>
+</ol>
+
+>**Answer: C**
+>Google recommends that workloads of less than 1TB should not be used in Bigtable, especially form a cost/value perspective. 
+
+<strong>36. You need to choose a structure storage option for storing very large amounts of data with the following properties and requirements:
+- The data has a single key
+- You need very low latency Which solution should you choose</strong>
+
+<ol type="A">
+  <li>BigTable</li>
+  <li>Data Store</li>
+  <li>Cloud SQL</li>
+  <li>BigQuery</li>
+</ol>
+
+>**Answer: A**
+>
+>Bigtable uses a single key and has very low latency (in milliseconds). It is the best choice. Datastore stores less data than Bigtable, and operates on multiple keys.
+
+**37. You need to replicate the logs that are ingested by your on-premise Apache Kafka cluster to Google Cloud to be stored for analysis in BigQuery. What should you do?**
+
+<ol type="A">
+  <li>Create an identical Kafka cluster on Compute Engine in GCP. Configure your on-premises Kafka cluster to duplicate all data to the GCP Kafka cluster. Use a Dataflow job to process data from Kafka and insert into BigQuery.</li>
+  <li>Configure the Pub/Sub Kafka connector on your on-premises Kafka cluster, and configure Pub/Sub as a source connector. Use a Cloud Dataflow job to read from a subscribed Pub/Sub topic and write to BigQuery</li>
+  <li>Create a Cloud Composer workflow to manage the replication of data from your Kafka cluster directly into BigQuery.</li>
+  <li>Configure the Pub/Sub Kafka connector on your on-premises Kafka cluster, and configure Pub/Sub as a sink connector. Use a Cloud Dataflow job to read from a subscribed Pub/Sub topic and write to BigQuery</li>
+</ol>
+
+>**Answer: D**
+
+**38. You have a Dataflow job that keeps failing due to errors in your input data. What steps can you take to improve pipeline reliability while at the same time, capturing failed data for reprocessing?**
+
+<ol type="A">
+  <li>Implement a try-catch block that transforms the both good and bad data. Create an additional output by using a new PCollection that can be output to Pub/Sub which can then be placed into GCS for further analysis.</li>
+  <li>Filter out errors as they occur, and view error entries using Stackdriver Logging</li>
+  <li>Implement a try-catch block that transforms the both good and bad data, and extract the incorrect entries from Stackdriver Logging.</li>
+  <li>Implement a try-catch block that transforms the both good and bad data. Publish the erroneous data to Pub/Sub, which can then be placed into GCS for further analysis.</li>
+</ol>
+
+>**Answer: A**
+>
+>Your pipeline needs to use an additional side output, that uses a PCollection to output errorenous data to Pub/Sub.
+>
+>The option D is almost correct, however it's not complete.
+
+**40. You work at very large organizations that has a very large analyst team. You use the default pricing model for BigQuery. During heavy usage, your analyst group occasionally runs out of the 2000 slots available for the BigQuery jobs. You do not want to create additional projects for the sole purpose of inscreasing slot count. What can you do to resolve this problem?**
+
+<ol type="A">
+  <li>You must create an additional project to increase your slot count, then spread the BigQuery loads across both projects.</li>
+  <li>Force-enable the 'use cached results' option for all available queries.</li>
+  <li>Switch to flat rate pricing to enable a higher total slot quota for your project.</li>
+  <li>Use the quotas page to increase your BigQuery slot count to 3000 as needed.</li>
+</ol>
+
+>**Answer: C**
+
+**41. You are selecting a streaming service for log messages that must include final result message ordering as part of building a data pipeline on Google Cloud. You want to stream input for 5 days and be able to query the most recent message value. You will be storing the data in a searchable repository. How should you set up the input messages?**
+
+<ol type="A">
+  <li>Use Apache Kafka on Compute Engine for input. Attach a timestamp to every message in the publisher.</li>
+  <li>Use Cloud Pub/Sub for input. Attach a unique identifier to every message in the publisher.</li>
+  <li>Use Apache Kafka on Compute Engine for input. Attach a unique identifier to every message in the publisher.</li>
+  <li>Use Cloud Pub/Sub for input. Attach a timestamp to every message in the publisher.</li>
+</ol>
+
+>**Answer: D**
+>
+>The option A is technically possible but not optimal because we have Google Cloud Pub/Sub already for this use case. 
+
+**42. You need to deploy a TensorFlow machine-learning model to Google Cloud. You want to maximize the speed and minimize the cost of model prediction and deployment. What should you do?**
+
+<ol type="A">
+  <li>Export 2 copies of your trained model to a SavedModel format. Store artifacts in Cloud Storage. Run 1 version on CPUs and another version on GPUs.</li>
+  <li>Export 2 copies of your trained model to a SavedModel format. Store artifacts in Cloud ML Engine. Run 1 version on CPUs and another version on GPUs.</li>
+  <li>Export your trained model to a SavedModel format. Deploy and run your model from a Kubernetes Engine cluster.</li>
+  <li>Export your trained model to a SavedModel format. Deploy and run your model on Cloud ML Engine.</li>
+</ol>
+
+>**Answer: D**
+
+**41. Your organization has migrated their Hadoop workloads to Cloud Dataproc. To fully take advantage of the cloud, you want to decouple your Hadoop storage and compute, and be able to destroy your cluster when compute is complete in order to save costs while preserving your data. What should you do?**
+
+<ol type="A">
+  <li>You must use another processing framework such as Apache Beam for this task.</li>
+  <li>Copy your data from HDFS to Cloud Storage. Update your scripts to point to the Cloud Storage location (gs://) instead of the HDFS location (hdfs://). Within your Dataproc job, configure output to output to Cloud Storage.</li>
+  <li>Use the Dataproc sync tool to synchronize HDFS with GCS.</li>
+  <li>You must leave your managed Dataproc cluster running in order to access computer data.</li>
+</ol>
+
+>**Answer: C**
+
+**42. Your organization needs to develop their machine learning model to control topology definitions. There are a large number of possible configurations to achieve the best results. What components of their machine learning model would they adjust to account for increased complexity? (Choose two answers.)**
+
+<ol type="A">
+  <li>Learning rate</li>
+  <li>Neurons</li>
+  <li>Epoch</li>
+  <li>Hidden layers</li>
+</ol>
+
+>**Answer: B&D**
+>
+>Epoch is a pass through the training dataset, not related to complexity. 
+
+**43. Your company’s aging Hadoop servers are nearing end of life. Instead of replacing your hardware, your CIO has decided to migrate the cluster to Google Cloud Dataproc. A direct lift and shift migration of the cluster would require 30 TB of disk space per individual node. There are cost concerns about using that much storage. How can you best minimize the cost of the migration?**
+
+<ol type="A">
+  <li>Decouple storage from computer by placing the data in Cloud Storage</li>
+  <li>Place archived data in Cloud Storage, and only use 'hot' data in HDFS on the cluster disks</li>
+  <li>Implement maximum data compression to reduce the amount of disk space your data uses.</li>
+  <li>Use preemptible VM's to save costs on cluster storage usage.</li>
+</ol>
+
+>**Answer: A**
+>
+>Placing all input and output data in Cloud Storage allows you to 1. Treat clusters as ephemeral and 2. Use a much cheaper storage location compared to persistent disks without a noticeable impact on performance.
+
+**44. You are setting up multiple MySQL databases on Compute Engine. You need to collect logs from your MySQL applications for audit purposes. How should you approach this?**
+
+<ol type="A">
+  <li>Configure Cloud Composer to monitor and report on instance performance metrics.</li>
+  <li>Install the Stackdriver Logging agent on your database instances and configure the fluentd plugin to read and export your MySQL logs into Stackdriver Logging.</li>
+  <li>Install the Stackdriver Monitoring agent on your instances, configure the MySQL plugin, and export logs to Stackdriver Monitoring.</li>
+  <li>Configure Stackdriver Logging to natively monitor application logs, which will appear in Stackdriver Logging.</li>
+</ol>
+
+>**Answer: B**
