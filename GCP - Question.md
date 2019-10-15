@@ -774,3 +774,26 @@ FROM `some-dataset.orders_*`
 </ol>
 
 >**Answer: B**
+
+**45. Your organization is ready to migrate their Hadoop workloads to Google Cloud. For the data migration, they need a cost-effective 'data lake' that will scale to their growing data needs and be able to easily connect to their Hadoop workloads in the cloud. What two actions should they perform?**
+
+<ol type="A">
+  <li>Install the Bigtable connector in the on-premises Hadoop cluster, then migrate data to Bigtable for long-term storage.</li>
+  <li>Add the Cloud Storage connector to their on-premises Hadoop environment, and transfer their data to a Cloud Storage bucket.</li>
+  <li>For the existing Hadoop jobs that are migrating to Dataproc, use the gs:// prefix instead of hdfs:// to access data from Cloud Storage.</li>
+  <li>Create a Dataproc cluster for long-term use, and transfer data to the HDFS partition on the cluster.</li>
+</ol>
+
+>**Answer: B&C**
+
+**46. You are working on a project with two compliance requirements. The first requirement states that your developers should be able to see the Google Cloud Platform billing charges for only their projects. The second requirement states that your finance team members can set budgets and view the current charges for all projects in the organization. The finance team should not be able to view the project contents. You want to set permissions. What should you do?**
+
+<ol type="A">
+  <li>Add the finance team to the Viewer role for the Project. Add the developers to the Security Reviewer role for each of the billing accounts.</li>
+  <li>Add the developers and finance managers to the Viewer role for the Project.</li>
+  <li>Add the finance team members to the default IAM Owner role. Add the developers to a custom role that allows them to see their spending only.</li>
+  <li>Add the finance team members to the Billing Administrator role for each of the billing accounts that they need to manage. Add the developers to the Viewer role for the Project.</li>
+</ol>
+
+>**Answer: D**
+
