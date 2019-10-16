@@ -263,13 +263,6 @@ Read more:
   - Row key: First column
   - Columns grouped into columns families 
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-</style>
 <table class="tg">
   <tr>
     <th class="tg-0pky"></th>
@@ -329,13 +322,6 @@ Read more:
   - Sequential ID's
   - Timestamps alone/at front
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-c3ow{border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-</style>
 <table class="tg">
   <tr>
     <th class="tg-c3ow">Row Key</th>
@@ -380,13 +366,6 @@ Read more:
 
 - Transactional Consistency vs. Scalability
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-7btt{font-weight:bold;border-color:inherit;text-align:center;vertical-align:top}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-</style>
 <table class="tg">
   <tr>
     <th class="tg-7btt">Database </th>
@@ -455,16 +434,6 @@ Read more:
 #### Typical Relational Database
 Two sets of related data = Two tables 
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-w747{background-color:#dae8fc;text-align:left;vertical-align:top}
-.tg .tg-6dj5{font-weight:bold;background-color:#ffcb2f;border-color:#000000;text-align:center;vertical-align:top}
-.tg .tg-0lax{text-align:left;vertical-align:top}
-.tg .tg-zci2{font-weight:bold;background-color:#dae8fc;text-align:left;vertical-align:top}
-.tg .tg-oy90{background-color:#ffcb2f;border-color:#000000;text-align:left;vertical-align:top}
-</style>
 <table class="tg">
   <tr>
     <th class="tg-6dj5">SingerID</th>
@@ -503,14 +472,6 @@ Two sets of related data = Two tables
 #### Spanner
 Two sets of related data = Interleave tables
 
-<style type="text/css">
-.tg  {border-collapse:collapse;border-spacing:0;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}
-.tg .tg-hrrh{background-color:#ffffff;color:#333333;border-color:#000000;text-align:left;vertical-align:top}
-.tg .tg-2qwx{background-color:#ffffff;color:#333333;border-color:#000000;text-align:center;vertical-align:top}
-.tg .tg-7euo{background-color:#ffffff;color:#333333;text-align:left;vertical-align:top}
-</style>
 <table class="tg">
   <tr>
     <th class="tg-2qwx">Singers(1)</th>
