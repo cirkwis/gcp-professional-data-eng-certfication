@@ -797,3 +797,79 @@ FROM `some-dataset.orders_*`
 
 >**Answer: D**
 
+**47. You are training a machine learning model to predict the liklihood of rain based on an available dataset of weather data. In reviewing your input data, the amount of humidity in the air has a very strong influence on the chance of rain, especially compared to less relevant data. How can you incorporate this more important data to that it properly influences the model?**
+
+<ol type="A">
+  <li>Create a feature from the humidity data point, and use L2 regularization to optimize the model.</li>
+  <li>Tune your hyperparameters to give greater weighting to the humidty feature over others.</li>
+  <li>Create a feature from the humidity data point, and use L1 regularization to optimize the model.</li>
+  <li>Reduce your epochs except for humidity features.</li>
+</ol>
+
+>**Answer: C**
+>
+>- **L1 and L2 regularization** - different approaches to tuning out noise. Each has different use case and purpose. 
+>- **L1** - Lasso Regression - assigns greater importance to **more influential features**
+>    - Shrinks less important features influence to zero
+>    - Good for models with many features, some more important than others
+>    - Example: Choosing features to predict likehood of home selling => House price more influential feature than carpet color. 
+>- **L2** - Ridge Regression - performs better when all the input features influence the output and all with weights are of **roughly equal size**
+
+**48. Your organization is making the move to Google Cloud. You need to bring your existing big data processing workflows to the cloud without having to re-train employees on new products. Your organization uses the Apache Hadoop ecosystem for big data processing. Which Google Cloud managed service would your workflow move to?**
+
+<ol type="A">
+  <li>Cloud Dataproc.</li>
+  <li>Cloud Bigtable.</li>
+  <li>Cloud Pub/Sub.</li>
+  <li>Cloud Dataflow.</li>
+</ol>
+
+>**Answer: A**
+
+**49. In order to protect live customer data, your organization needs to maintain separate operating environments —development/test, staging, and production— to meet the needs of running experiments, deploying new features, and serving production customers. What is the best practice for isolating these environments while at the same time maintaining operability?**
+
+<ol type="A">
+  <li>Create separate organization accounts for each environment, and use domain wide IAM roles to allow access between each organization environment to share data as needed.</li>
+  <li>Create a separate project for dev/test, staging, and production. Migrate relevant data between projects when ready for the next stage.</li>
+  <li>Place all three environments in the same project, however, use separate Cloud Storage buckets, Cloud ML Engine clusters, and other services for each environment</li>
+  <li>Place resources into the same project. but use object versioning in Cloud Storage in order to separate data by environment.</li>
+</ol>
+
+>**Answer: B**
+
+**50. You want to display aggregate view counts for your YouTube channel data in Data Studio. You want to see the video tiles and view counts summarized over the last 30 days. You also want to segment the data by the Country Code using the fewest possible steps. What should you do**
+
+<ol type="A">
+  <li>Export your YouTube views to Cloud Storage. Set up a Cloud Storage data source for Data Studio. Set Views as the metric and set Video Title and Country Code as report dimensions.</li>
+  <li>Export your YouTube views to Cloud Storage. Set up a Cloud Storage data source for Data Studio. Set Views as the metric and set Video Title as a report dimension. Set Country Code as a filter.</li>
+  <li>Set up a YouTube data source for your channel data for Data Studio. Set Views as the metric and set Video Title as a report dimension. Set Country Code as a filter.</li>
+  <li>Set up a YouTube data source for your channel data for Data Studio. Set Views as the metric and set Video Title and Country Code as report dimensions.</li>
+</ol>
+
+>**Answer: D**
+>
+>There is no need to export; you can use the existing YouTube data source. Country Code is a dimension because it's a string and should be displayed as such, that is, showing all countries, instead of filtering.
+
+**51. Your BigQuery dataset contains 1500 tables. When conducting a query, you are limited to a maximum of 1000 tables that you can query at once. You need to query data across all 1500 tables. What should you do?**
+
+<ol type="A">
+  <li>Place tables into separate datasets.</li>
+  <li>If possible, merge the 1500 tables to bring the total number below 1000. You may still partition single tables to divide data for queries.</li>
+  <li>Export the data to Bigtable, and conduct your query inside of Bigtable.</li>
+  <li>Create multiple views of chunks of the 1500 tables, then query the multiple views.</li>
+</ol>
+
+>**Answer: B**
+>
+>If you have over 1000 tables, you need to bring that number to below 1000 to query all of them at once. Merge tables, then use table partitioning to divide single tables into segments (called partitions), as long they are partitioned by time.
+
+**52. You are building a data pipeline on Google Cloud. You need to prepare source data for a machinelearning model. This involves quickly deduplicating rows from three input tables and also removing outliers from data columns where you do not know the data distribution. What should you do?**
+
+<ol type="A">
+  <li>Use Cloud Dataprep to preview the data distributions in sample source data table columns. Write a recipe to transform the data and add it to the Cloud Dataprep job.</li>
+  <li>Write an Apache Spark job with a series of steps for Cloud Dataflow. The first step will examine the source data, and the second and third steps will perform data transformations.</li>
+  <li>Use Cloud Dataprep to preview the data distributions in sample source data table columns. Click on each column name, click on each appropriate suggested transformation, and then click Add to add each transformation to the Cloud Dataprep job.</li>
+  <li>Write an Apache Spark job with a series of steps for Cloud Dataproc. The first step will examine the source data, and the second and third steps will perform data transformations.</li>
+</ol>
+
+>**Answer: C**
