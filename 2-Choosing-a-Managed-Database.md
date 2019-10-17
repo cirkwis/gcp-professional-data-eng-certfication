@@ -97,8 +97,7 @@
 ![Other important facts](./image/3-3.png "Other important facts")
 
 ## Data organization
-- Entities grouped by kind (category)
-- Entities can be hierarchical (nested)
+- Entities are grouped by kind (category) and can be hierarchical (nested)
 - Each entity has one or more properties
 - Properties have a value assigned
 
