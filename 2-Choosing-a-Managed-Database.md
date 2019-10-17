@@ -311,19 +311,27 @@ Read more:
 - **Cloud Bigtable tables are sparse**. Empty columns don't take up any space. As a result, it often makes sense to create a very large number of columns, even if most columns are empty in most rows.
 - As a best practice, store a maximum of 10 MB in a single cell and 100 MB in a single row
 
-### Schema efficiency 
-- Goal = spread load over multiple nodes
-  - All on one node = 'hotspotting'
+### Choosing a row key
+Start by asking how you'll use the data that you plan to store. For example:
 
-#### Row key best practices 
-- Good row keys = distributed load
-  - Reverse domain names (com.linuxacademy.suport)
-  - String identifiers (mattu)
-  - Time stamps (reverse, NOT at front/or only identifer)
-- Poor row keys = hotspotting
-  - Domaine names (support.linuxacademy.com)
-  - Sequential ID's
-  - Timestamps alone/at front
+- User information: Do you need quick access to information about connections between users (for example, whether user A follows user B)?
+- User-generated content
+- Time series data
+
+#### Types of key
+- Reverse domain names
+- String identifiers
+- Timestamps
+
+#### Multiple values in a single row key
+- Row key prefixes
+- Using row key prefixes for multitenancy
+
+#### Row keys to avoid
+- Domain names
+- Sequential numeric IDs
+- Frequently updated identifiers
+- Hashed values
 
 <table class="tg">
   <tr>
