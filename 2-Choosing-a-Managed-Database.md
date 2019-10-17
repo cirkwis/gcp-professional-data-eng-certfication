@@ -213,7 +213,10 @@ Read more:
   - Al nodes and clusters 
 - Nodes grouped into clusters
   - 1 or more clusters per instance 
-- Auto-scaling storage 
+- Auto-scaling storage: In some cases, it can be useful to scale your Cloud Bigtable cluster programmatically based on metrics such as the cluster's CPU usage. For example, if your cluster is under heavy load, and its CPU usage is extremely high, you can add nodes to the cluster until its CPU usage drops
+
+>Source: https://cloud.google.com/bigtable/docs/scaling 
+
 - Instance types:
   - Development - low cost, single node
     - No replication
@@ -253,7 +256,7 @@ Read more:
 
 ## Instance Organization
 - Data organization
-  - One big table (hence then name Bigatat)
+  - One big table
   - Table can be thousands of columns/billions of rows 
   - Table is shared acorss tablets
 - Table components 
@@ -297,11 +300,15 @@ Read more:
 ## Schem Design 
 
 ### Schema Design
-- Per table - Row key is only indexed item
-- Keep all entity information in a single row
-- Related entities should be in adjacent rows 
-  - More efficient reads
-- Tables are sparse - empty columns take no space
+- **Each table has only one index, the row key**.
+- **Rows are sorted lexicographically by row key**, from the lowest to the highest byte string. Row keys are sorted in big-endian, or network, byte order, the binary equivalent of alphabetical order.
+- **Columns are grouped by column family** and sorted in lexicographic order within the column family.
+- **All operations are atomic at the row level**. For example, if you update two rows in a table, it's possible that one row will be updated successfully and the other update will fail. For this reason, follow these guidelines:
+  - Avoid schema designs that require atomicity across rows.
+  - In general, keep all information for an entity in a single row. However, if your use case doesn't require you to make atomic updates or reads to an entity, you can split the entity across multiple rows. Splitting across multiple rows is recommended if the entity data is large (hundreds of MB).
+- Ideally, **both reads and writes should be distributed** evenly across the row space of the table.
+- **Related entities should be stored in adjacent rows**, which makes reads more efficient.
+- **Cloud Bigtable tables are sparse**. Empty columns don't take up any space. As a result, it often makes sense to create a very large number of columns, even if most columns are empty in most rows.
 
 ### Schema efficiency 
 - Well defined row keys = less work
