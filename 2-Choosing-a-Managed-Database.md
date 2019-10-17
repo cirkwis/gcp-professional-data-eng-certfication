@@ -155,8 +155,6 @@
 ## Data Consistency
 
 ### What is data consistency in queries?
-- "How up to date are these results?"
-- "Does the order matter?"
 - Strongly consitent = Parallel processes see changes in same order
   - Query is guaranteed up to date, but may take longer to complete
 - Eventually consistent = Parallel process can see change out of order, will eventually see accurate end state
