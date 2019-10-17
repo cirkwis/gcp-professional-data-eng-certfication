@@ -309,13 +309,12 @@ Read more:
 - Ideally, **both reads and writes should be distributed** evenly across the row space of the table.
 - **Related entities should be stored in adjacent rows**, which makes reads more efficient.
 - **Cloud Bigtable tables are sparse**. Empty columns don't take up any space. As a result, it often makes sense to create a very large number of columns, even if most columns are empty in most rows.
+- As a best practice, store a maximum of 10 MB in a single cell and 100 MB in a single row
 
 ### Schema efficiency 
-- Well defined row keys = less work
-  - Multiple values in row key
-- Row key (or prefix) should be sufficient for search
 - Goal = spread load over multiple nodes
   - All on one node = 'hotspotting'
+
 #### Row key best practices 
 - Good row keys = distributed load
   - Reverse domain names (com.linuxacademy.suport)
