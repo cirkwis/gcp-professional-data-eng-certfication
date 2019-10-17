@@ -873,3 +873,27 @@ FROM `some-dataset.orders_*`
 </ol>
 
 >**Answer: C**
+
+**53. Which of these is NOT a type of trigger that applies to Dataflow?**
+
+<ol type="A">
+  <li>Element size in bytes.</li>
+  <li>Element count.</li>
+  <li>Combinations of other triggers.</li>
+  <li>Timestamp.</li>
+</ol>
+
+>**Answer: A**
+
+**54. What types of Bigtable row keys can lead to hotspotting? (Choose all that apply)**
+
+<ol type="A">
+  <li>Leading with a non-reversed timestamp.</li>
+  <li>Standard domain names (non-reversed).</li>
+  <li>Reverse timestamps.</li>
+  <li>Non-sequential numeric IDs.</li>
+</ol>
+
+>**Answer: A & B**
+
+**55. Your organization is streaming telemetry data into BigQuery for long-term storage (2 years) and analysis, at the rate of about 100 million records per day. They need to be able to run queries against certain time periods of data without incurring the costs of querying all available records. What is the preferred method for doing so?**
