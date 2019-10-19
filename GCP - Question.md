@@ -897,3 +897,153 @@ FROM `some-dataset.orders_*`
 >**Answer: A & B**
 
 **55. Your organization is streaming telemetry data into BigQuery for long-term storage (2 years) and analysis, at the rate of about 100 million records per day. They need to be able to run queries against certain time periods of data without incurring the costs of querying all available records. What is the preferred method for doing so?**
+
+<ol type="A">
+  <li>Create a single table, but query only individual rows by data in the WHERE clause.</li>
+  <li>Use a LIMIT clause to limit the number of rows queried based on WHERE clause criteria.</li>
+  <li>Partition a single table by day, and run queries against individual partitions.</li>
+  <li>Create a new table, one for each day. Run queries against the groups of tables relevant to their needs.</li>
+</ol>
+
+>**Answer: C**
+
+**56. You created a job which runs daily to import higly sensitive data from an on-premise location to Cloud Storage. You also setup a streaming data insert into Cloud Storage via a Kafka node that is running on a Compute Engine instance. You need to encrypt the data at rest and supply your own encryption key. Your key should not be stored in the Google Cloud. What should you do?**
+
+<ol type="A">
+  <li>Upload your own encryption key to Cloud Key Management Service, and use it to encrypt your data in your Kafka node hosted on Compute Engine.</li>
+  <li>Create a dedicated service account, and use encryption at rest to reference your data stored in Cloud Storage and Compute Engine data as part of your API service calls.</li>
+  <li>Upload your own encryption key to Cloud Key Management Service, and use it to encrypt your data in Cloud Storage. Use your uploaded encryption key and reference it as part of your API service calls to encrypt your data in the Kafka node hosted on Compute Engine.</li>
+  <li>Supply your own encryption key, and reference it as part of your API service calls to encrypt your data in Cloud Storage and your Kafka node hosted on Compute Engine.</li>
+</ol>
+
+>**Answer: D**
+
+**57. You have in your possession a database of financial transactions, which include a user's name, location, purchase location, and purchase amount. With this data, what two types of machine learning can potentially applied to this dataset?**
+
+<ol type="A">
+  <li>Apply supervised regressing learning to label which transactions are likely to be fraudulent.</li>
+  <li>Apply unsupervised learning to label which transactions are likely to be fraudulent.</li>
+  <li>Unsupervised learning to identify patterns (clustering) in the data to predict the location of future purchases.</li>
+  <li>Apply reinforcement learning to predict the location of purchase.</li>
+  <li>Apply labels to the data based on whether it is fraudulent or not-fraudulent. Then apply supervised classification learning to predict which future transactions are likely to be fraudulent.</li>
+</ol>
+
+>**Answer: C&E**
+
+**58. What will happen to your data in a Bigtable instance if a node goes down?**
+
+<ol type="A">
+  <li>Bigtable will attempt to rebuild the data from RAID disk configuration when the node comes back online.</li>
+  <li>Nothing, as the storage is separated from the node compute.</li>
+  <li>Lost data will automatically rebuild itself from Cloud Storage backups when the node comes back online.</li>
+  <li>Apply reinforcement learning to predict the location of purchase.</li>
+  <li>Data will be lost, which makes regular backups to Cloud Storage necessary.</li>
+</ol>
+
+>**Answer: B**
+
+**59. You are a consultant for several organizations. Each organization has data in their own BigQuery table within a single project. For application access reasons, all of the tables must remain in the same project. You want to give access to each organization to view and run queries against their own data without exposing the data of organizations to unauthorized viewers. What should you do?**
+
+<ol type="A">
+  <li>You must separate the tables by project, and use a service account in your application to access data in each project. Give out project-wide roles to each organization.</li>
+  <li>Place the tables in a single dataset, and apply IAM roles to each table, limiting access per table to each organization.</li>
+  <li>Place all data in a single table, create authorized views restricting access by row based on the SESSION_USER() field. Add that same SESSION_USER() field with the same email addresses according to which company needs access to which roles.</li>
+  <li>Create a separate dataset for each organization in the same project. Place each organization's table in each dataset. Restrict access to the organization's dataset to only that company, from which they can view their table
+but no one else's.</li>
+</ol>
+
+>**Answer: D**
+
+**60. Pick two benefits of using denormalized data in BigQuery?**
+
+<ol type="A">
+  <li>Decreased query complexity.</li>
+  <li>Less storage space used</li>
+  <li>Increased query performance</li>
+  <li>Reduces the amount of data processed</li>
+</ol>
+
+>**Answer: A & C**
+
+**61. Your infrastructure runs on another cloud and includes a set of multi-TB enterprise databases that are backed up nightly both on-premises and also to that cloud. You need to create a redundant backup to Google Cloud. You are responsible for performing scheduled monthly disaster recovery drills. You want to create a cost-effective solution. What should you do?**
+
+<ol type="A">
+  <li>Use Storage Transfer Service to transfer the offsite backup files to a Cloud Storage Nearline storage bucket as a " Correct final destination.</li>
+  <li>Use Storage Transfer Service to transfer the offsite backup files to a Cloud Storage Coldline storage bucket as a final destination.</li>
+  <li>Use Transfer Appliance to transfer the offsite backup files to a Cloud Storage Nearline storage bucket as a final destination.</li>
+  <li>Use Transfer Appliance to transfer the offsite backup files to a Cloud Storage Coldline bucket as a final destination.</li>
+</ol>
+
+>**Answer: A**
+>
+> A is the correct answer because you will need to access your backup data monthly to test your disaster recovery process, so you should use a Nearline bucket; also, because you will be performing ongoing, regular data transfers, so you should use the storage transfer service.
+>
+> Transfer Appliance is used for on-premises transfers, not cloud-to-cloud, and is not used for repeated/scheduled transfers. Also, Coldline buckets need to stay un-modified for 3 months (90 days) to avoid additional charges, and your scenario calls for once a month access.
+
+**62. Your team has decided to use Datalab for interactive machine learning exercises. You want your team members to share their work and progress with each other. How do you accomplish this?**
+
+<ol type="A">
+  <li>Every team member will use their own Datalab notebook and synchronize changes to the shared Cloud Source Repository.</li>
+  <li>Use the team sync feature included in Datalab notebooks to synchronize each member's work.</li>
+  <li>Give your team members Compute Instance Admin and Service Account Actor roles to access a shared notebook.</li>
+  <li>Create a shared Datalab notebook, and assign the Datalab Editor role to your team members to access it.</li>
+</ol>
+
+>**Answer: A**
+
+**63. Your production Bigtable instance is currently using four nodes. Due to the increased size of your table, you need to add additional nodes to offer better performance. How should you accomplish this without the risk of data loss?**
+
+<ol type="A">
+  <li>Power off your Bigtable instance, then increase the node count, then power back on. Be sure to schedule downtime in advance.</li>
+  <li>Export your Bigtable data as sequence files into Cloud Storage, then import the data into a new Bigtable instance with additional nodes added.</li>
+  <li>Use the node migration service to add additional nodes.</li>
+  <li>Edit instance details and increase the number of nodes. Save your changes. Data will re-distribute with no downtime.</li>
+</ol>
+
+>**Answer: D**
+
+**64. You have 250,000 devices which produce a JSON device status event every 10 seconds. You want to capture this event data for outlier time series analysis. What should you do?**
+
+<ol type="A">
+  <li>Ship the data into BigQuery. Develop a custom application that uses the BigQuery API to query the dataset and display a device's outlier data based on your business requirements.</li>
+  <li>Ship the data into Cloud Bigtable. Use the Cloud Bigtable cbt tool to display device outlier data based on your business requirements.</li>
+  <li>Ship the data into Cloud Bigtable. Install and use the HBase shell for Cloud Bigtable to query the table for the device outlier data based on your business requirements.</li>
+  <li>Ship the data into BigQuery. Use the BigQuery console to query the dataset and display device outlier data based on your business requirements.</li>
+</ol>
+
+>**Answer: B**
+
+**65. Why do you want to train a machine learning model locally before training on cloud resources? (Choose all that apply)**
+
+<ol type="A">
+  <li>Faster training with scaling resources.</li>
+  <li>Faster iteration.</li>
+  <li>Save costs.</li>
+  <li>Restrict access to other parties.</li>
+</ol>
+
+>**Answer: B & C**
+
+**66. You are training a facial detection machine learning model. Your model is suffering from overfitting your training data. Choose three steps you can take to solve this problem.**
+
+<ol type="A">
+  <li>Use a larger set of features.</li>
+  <li>Use a smaller set of features.</li>
+  <li>Reduce the number of training examples.</li>
+  <li>Increase the number of training examples.</li>
+  <li>Increase the regularization parameters.</li>
+  <li>Decrease the regularization parameters.</li>
+</ol>
+
+>**Answer: B & C & D**
+
+**67. You are building a machine learning model to predict the number of lightning strikes during a storm. Your model has thousands of input features to train on. You want to improve the training speed of the model by removing features, but do not want to negatively effect your model's accuracy. What action should you take?**
+
+<ol type="A">
+  <li>Combine highly co-dependent and redundant features into one representative feature.</li>
+  <li>Implement L2 regularization to automatically 'prune' unneeded features.</li>
+  <li>Remove the features that have null values for the majority of your records.</li>
+  <li>Remove features that have high correlation to your output labels.</li>
+</ol>
+
+>**Answer: A**
