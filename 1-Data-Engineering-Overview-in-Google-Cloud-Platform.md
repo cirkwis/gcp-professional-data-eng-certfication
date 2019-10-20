@@ -58,6 +58,19 @@ This section is particularly focusing on Apache Pig, Hive, Spark, Hadoop and Bea
   - Useful for ingest, transform and publish workflows
   - Option for Public read access
 
+### Storage Classes
+- The storage class you set for an object affects the object's availability and pricing model
+  - You can change the storage class of an existing object either by rewriting the object or by using Object Lifecyle Management
+- When you create a bucket, you can specify a default storage class for the bucket. When you add objects to the bucket, they inhenrit this storage class unless explicitly set otherwise. 
+  - If you don't specify a default storage class when you create a bucket, that buckets default storage class is set to Standrad Storage. 
+  - Changing the default storage class of a bucket does not affect any of the objects that already exist in the bucket. 
+
+| Storage Class                 | Name for APIs and gsutil | Minimum storage duration |
+| :---------------------------- | :----------------------- | :----------------------- |
+| Standard Storage              | standard                 | None                     |
+| Nearline Storage              | nearline                 | 30 days                  |
+| Coldline Storage              | coldline                 | 90 days                  |
+
 ### Data Engineering perspective
 - Migrating existing workfloads 
   - Migrate databases/data into Cloud Storage for import
@@ -69,14 +82,12 @@ This section is particularly focusing on Apache Pig, Hive, Spark, Hadoop and Bea
   - one time transfer, periodic sync 
 - Data transfer appliance - physically shipped appliance 
   - Load up to 1 petabyte, ship to GCP, loaded into bucket
-  - gsutil, JSON API - "gsutil cp ..."
+- Other API: gsutil, JSON API - "gsutil cp ..."
 
 ![Getting data in and out of Cloud Storage](./image/2-2.png "Getting data in and out of Cloud Storage")
 
 ## Database types
-- Two primary databases types:
-  - relational/SQL
-  - non-relational/NoSQL
+- Two primary databases types: **relational/SQL** vs **non-relational/NoSQL**
 - Relational (SQL) databases: **"Consistency and reliability over performance"**
   - SQL = Structured Query Language
   - Structured and standardized tables - rows and columns 
@@ -84,7 +95,7 @@ This section is particularly focusing on Apache Pig, Hive, Spark, Hadoop and Bea
   - High consistency
   - ACID compliance 
     - Atomicity, Consistency, Isolation and Durability
-  - Applications: 
+  - Applications: transactional application,...
   - Pros: standardized, consistent, reliable and data integrity
   - Cons: Poor scalling, not as fast performing, not good for semi-structured data 
 - Non-relational (NoSQL) databases: **"Performance over consistency"**
