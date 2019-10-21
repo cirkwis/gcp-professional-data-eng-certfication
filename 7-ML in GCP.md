@@ -204,6 +204,7 @@ The job is done! Here, there is no need to know or learn anything beforehand. Th
 
 ### Bucketizing and Crossing
 - The transformation of numeric features into categorical features, using a set of thresholds, is called bucketing (or binning)
+![Bucketizing](./image/bucketizing-needed.svg "Bucketizing")
 - A feature cross is a synthetic feature formed by multiplying (crossing) two or more features. Crossing combinations of features can provide predictive abilities beyond what those features can provide individually.
 
 ### Wide and Deep 
