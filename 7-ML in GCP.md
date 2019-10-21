@@ -143,22 +143,22 @@ The job is done! Here, there is no need to know or learn anything beforehand. Th
 ## Working with Neural Networks
 
 ### Key terminology
-- Neural network - model composed of layers, consisting of connected units (neurons): Learning from training datasets
-- Neuron - node, combines input values and creates one output value
-- Input - what you feed into a neuron 
-- Feature - input variable used to make predictions
+- **Neural network** - model composed of layers, consisting of connected units (neurons): Learning from training datasets
+- **Neuron** - node, combines input values and creates one output value
+- **Input** - what you feed into a neuron 
+- **Feature** - input variable used to make predictions
     - Detecting email spam (subject, keywords, sender address)
     - Identity animals (ears, eyes, colors, shapes)
-- Hidden layer - set of neurons operating from same input set
-- Feature engineering - deciding which features to use in a model
-- Epoch - single pass through training dataset
+- **Hidden layer** - set of neurons operating from same input set
+- **Feature engineering** - deciding which features to use in a model
+- **Epoch** - single pass through training dataset
     - Speed up training by training on a subset of data vs all data
 
 ### Making Adjustments with Parameters
-- Weights - multiplication of input values
-- Bias - value of output given a weight of O
+- **Weights** - multiplication of input values
+- **Bias** - value of output given a weight of O
 - ML adjusts these parameters automatically
-- Parameters = variables adjusted by training with data
+- **Parameters** = variables adjusted by training with data
 
 ### Rate of adjustments with Learning Rate
 - Magnitude of adjustments of weights and biases 
