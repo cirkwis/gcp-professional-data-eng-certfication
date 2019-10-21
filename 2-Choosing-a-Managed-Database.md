@@ -11,10 +11,6 @@
 ![Getting data in and out of Cloud Storage](./image/3-1.png "Getting data in and out of Cloud Storage")
 
 - Decision tree criteria
-    - Structured (database) or unstructured 
-    - Analytical or transactional?
-    - Relational (SQL) or Non-relational
-    - Scalability/availability/size requirements? 
 
 ![Decision tree criteria](./image/3-2.jpg "Decision tree criteria")
 
