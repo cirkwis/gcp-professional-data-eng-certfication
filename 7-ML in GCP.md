@@ -22,12 +22,41 @@
 - In unsupervised learning, the data does not have labels
     - Unsupervised problems are all about discovery, about looking at the raw data, and seeing if it naturally falls into groups. 
 
+### Unsupervised Learning 
+- Unsupervised learning is where only the input data (say, X) is present and no corresponding output variable is there.
+
+#### Why Unsupervised Learning?
+The main aim of Unsupervised learning is to model the distribution in the data in order to learn more about the data.
+
+It is called so, because there is no correct answer and there is no such teacher(unlike supervised learning). Algorithms are left to their own devises to discover and present the interesting structure in the data.
+
+#### Example of Unsupervised Learning
+Suppose there is a basket and it is filled with some fresh fruits. The task is to arrange the same type of fruits at one place. There is no information about those fruits beforehand, it's the first time that the fruits are being seen or discovered
+
+So how to group similar fruits without any prior knowledge about those.
+First, any physical characteristic of a particular fruit is selected. Suppose color.
+
+Then the fruits are arranged on the basis of the color. The groups will be something as shown below:
+>RED COLOR GROUP: apples & cherry fruits.
+>
+>GREEN COLOR GROUP: bananas & grapes.
+
+So now, take another physical character say, size, so now the groups will be something like this.
+>RED COLOR AND BIG SIZE: apple.
+>
+>RED COLOR AND SMALL SIZE: cherry fruits.
+>
+>GREEN COLOR AND BIG SIZE: bananas.
+>
+>GREEN COLOR AND SMALL SIZE: grapes.
+
+The job is done! Here, there is no need to know or learn anything beforehand. That means, no train data and no response variable. This type of learning is known as Unsupervised Learning.    
+
 
 ## Preventing Overfitted Training Models 
 
 ### What is Overfitting?
-- Training model "overfitted" to training data - unable to generalize with new data
-- Training model "fails to generalize" - account for slightly different but close enough data
+- Overfitting in ML is "the production of a model that corresponds **too closely or exactly** to a particular set of data (**training data set**), and may therefore **fail** to fit additional data (**test data set**) or predict future observations reliably"
 
 ### Causes of overfitting
 - Not enought training data: Need more variety of samples
@@ -38,9 +67,9 @@
 - MORE DATA!
     - Add more training data
     - Better generalize on variety
-- Make model less complex
-    - Use less (but more relevent) features
-    - Combine multiple co-dependant/redundant features into single representative feature: Also helps reduce model training time
+- Make model less complex by 
+    - Using less (but more relevent) features
+    - Combining multiple co-dependant/redundant features into single representative feature: Also helps reduce model training time
 - Remove "noise": increase **regularization** parameters
 
 ### Regularization
@@ -114,22 +143,22 @@
 ## Working with Neural Networks
 
 ### Key terminology
-- Neural network - model composed of layers, consisting of connected units (neurons): Learning from training datasets
-- Neuron - node, combines input values and creates one output value
-- Input - what you feed into a neuron 
-- Feature - input variable used to make predictions
+- **Neural network** - model composed of layers, consisting of connected units (neurons): Learning from training datasets
+- **Neuron** - node, combines input values and creates one output value
+- **Input** - what you feed into a neuron 
+- **Feature** - input variable used to make predictions
     - Detecting email spam (subject, keywords, sender address)
     - Identity animals (ears, eyes, colors, shapes)
-- Hidden layer - set of neurons operating from same input set
-- Feature engineering - deciding which features to use in a model
-- Epoch - single pass through training dataset
+- **Hidden layer** - set of neurons operating from same input set
+- **Feature engineering** - deciding which features to use in a model
+- **Epoch** - single pass through training dataset
     - Speed up training by training on a subset of data vs all data
 
 ### Making Adjustments with Parameters
-- Weights - multiplication of input values
-- Bias - value of output given a weight of O
+- **Weights** - multiplication of input values
+- **Bias** - value of output given a weight of O
 - ML adjusts these parameters automatically
-- Parameters = variables adjusted by training with data
+- **Parameters** = variables adjusted by training with data
 
 ### Rate of adjustments with Learning Rate
 - Magnitude of adjustments of weights and biases 
@@ -175,6 +204,7 @@
 
 ### Bucketizing and Crossing
 - The transformation of numeric features into categorical features, using a set of thresholds, is called bucketing (or binning)
+![Bucketizing](./image/bucketizing-needed.svg "Bucketizing")
 - A feature cross is a synthetic feature formed by multiplying (crossing) two or more features. Crossing combinations of features can provide predictive abilities beyond what those features can provide individually.
 
 ### Wide and Deep 
