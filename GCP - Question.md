@@ -1085,4 +1085,45 @@ but no one else's.</li>
 
 >**Answer: B.**
 >
-> to be completed. 
+>B is correct because you must set Owner credentials to use the "enable cache" option in BigQuery. It's also a Google best practice to use "enable cache" option when the business scenario calls for using prefetch catching. 
+>1) Report must use Owner's Credentials. 
+>2) You don't need to tell the users not to use the report, you need to tell the system to use Query and Pre-fetch caching to cut down on BigQuery jobs. 
+
+**70. A client is using Cloud SQL database to serve infrequently changing lookup tables that host data used by applications. The applications will not modify the tables. As they expand into other geographic regions they want to ensure good performance. What do you recommend?.**
+
+<ol type="A">
+  <li>Migrate to Cloud Spanner</li>
+  <li>Read replicas</li>
+  <li>Instance high availability configuration</li>
+  <li>Replicate from an external server</li>
+</ol>
+
+>**Answer: B.**
+>
+>B is correct. A read replica will increase the availability of the service and can be located closer to the users in the new geographies.
+
+**71. A client wants to store files from one location and retrieve them from another location. Security requirements are that no one should be able to access the contents of the file while it is hosted in the cloud. What is the best option?**
+
+<ol type="A">
+  <li>Default encryption should be sufficient</li>
+  <li>Client-side encryption</li>
+  <li>Customer-supplied Encryption Keys</li>
+  <li>Customer Managed Encryption Keys</li>
+</ol>
+
+>**Answer: B.**
+>
+>B is correct. The requirement is that the file cannot be decrypted in the cloud, so encrypt it before it's uploaded and after it's downloaded adds a layer of encryption.
+
+**72. A company wants to connect cloud applications to an Oracle database in its data center. Requirements are a maximum of 9 Gbps of data and a Service Level Agreement (SLA) of 99%.**
+
+<ol type="A">
+  <li>Implement a high-throughput Cloud VPN connection</li>
+  <li>Cloud Router with VPN</li>
+  <li>Dedicated Interconnect</li>
+  <li>Partner Interconnect</li>
+</ol>
+
+>**Answer: D**
+> d
+>This is correct. Partner Interconnect is useful for data up to 10 Gbps and is offered by ISPs with SLAs.
