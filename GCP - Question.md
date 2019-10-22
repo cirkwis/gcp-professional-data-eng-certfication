@@ -462,13 +462,13 @@ FROM `some-dataset.orders_*`
 >
 ><strong>Source(s): </strong><a href="https://cloud.google.com/bigtable/docs/installing-hbase-shell" target="_blank">Hbase Shell</a>
 
-**22. What is the recommended action to do in order to switch between SSD and HDD storage for your Google Cloud Bigtable instance?**
+**22 (*Q68*). What is the recommended action to do in order to switch between SSD and HDD storage for your Google Cloud Bigtable instance?**
 
 <ol type="A">
-  <li>create a third instance and sync the data from the two storage types via batch jobs.</li>
-  <li>export the data from the existing instance and import the data into a new instance.</li>
-  <li>run parallel instances where one is HDD and the other is SDD.</li>
-  <li>the selection is final and you must resume using the same storage type.</li>
+  <li>Create a third instance and sync the data from the two storage types via batch jobs.</li>
+  <li>Export the data from the existing instance and import the data into a new instance.</li>
+  <li>Run parallel instances where one is HDD and the other is SDD.</li>
+  <li>The selection is final and you must resume using the same storage type.</li>
 </ol>
 
 >**Answer: B**
@@ -1047,3 +1047,42 @@ but no one else's.</li>
 </ol>
 
 >**Answer: A**
+
+**68. Promote a Cloud Bigtable solution with a lot of data from development to production and optimize for performance.**
+
+<ol type="A">
+  <li>Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is HDD.</li>
+  <li>Change your Cloud Bigtable instance type from Development to Production, and set the number of nodes to at least 3. Verify that the storage type is SSD.</li>
+  <li>Export the data from your current Cloud Bigtable instance to Cloud Storage. Create a new Cloud Bigtable Production instance type with at least 3 nodes. Select the HDD storage type. Import the data into the new instance from Cloud Storage.</li>
+  <li>Export the data from your current Cloud Bigtable instance to Cloud Storage. Create a new Cloud Bigtable Production instance type with at least 3 nodes. Select the SSD storage type. Import the data into the new instance.</li>
+</ol>
+
+>**Answer: B.**
+>
+> B is the correct answer because Cloud Bigtable allows you to "scale in place", which meets your requirements for this scenario. 
+
+**69. As part of your backup plan, you want to be able to restore snapshots of Compute Engine instances using the fewest steps.**
+
+<ol type="A">
+  <li>Export the snapshots to Cloud Storage. Create disks from the exported snapshots files. Create images from the new disks.</li>
+  <li>Export the snapshots to Cloud Storage. Create images from the exported snapshot files.</li>
+  <li>Use the snapshots to create replacement disks. Use the disks to create instances as needed.</li>
+  <li>Use the snapshots to create replacement instances as needed.</li>
+</ol>
+
+>**Answer: D.**
+>
+> B is the correct answer because the scenario asks how to recreate instances. You can create an instance directly from a snapshot without restoring to disk first. 
+
+**70. You want to minimize costs to run Google Data Studio reports on BigQuery queries by using prefetch caching.**
+
+<ol type="A">
+  <li>Setup the report to use the Owner's credentials to access the underlying data in BigQuery, and direct the users to view the report only once per business day (24-hours period).</li>
+  <li>Setup the report to use the Owner's credentials to access the underlying data in BigQuery, and verify that the "Enable cache" checkbox is selected for the report.</li>
+  <li>Setup the report to use the Viewer's credentials to access the underlying data in BigQuery, and also set it up to be a 'view-only' report.</li>
+  <li>Setup the report to use the Viewer's credentials to access the underlying data in BigQuery, and verify that the 'Enable cache' checkbox is not selected for the report.</li>
+</ol>
+
+>**Answer: B.**
+>
+> to be completed. 
