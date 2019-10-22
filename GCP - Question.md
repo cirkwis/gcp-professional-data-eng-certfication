@@ -1125,5 +1125,5 @@ but no one else's.</li>
 </ol>
 
 >**Answer: D**
-> d
->This is correct. Partner Interconnect is useful for data up to 10 Gbps and is offered by ISPs with SLAs.
+>
+>D is correct. Partner Interconnect is useful for data up to 10 Gbps and is offered by ISPs with SLAs.
