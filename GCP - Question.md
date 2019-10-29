@@ -1127,3 +1127,17 @@ but no one else's.</li>
 >**Answer: D**
 >
 >D is correct. Partner Interconnect is useful for data up to 10 Gbps and is offered by ISPs with SLAs.
+
+**73. How would you query specific partitions in a BigQuery table?**
+
+<ol type="A">
+  <li>Use the DAY column in the WHERE clause</li>
+  <li>Use the EXTRACT(DAY) clause</li>
+  <li>Use the __PARTITIONTIME pseudo-column in the WHERE clause</li>
+  <li>Use DATE BETWEEN in the WHERE clause</li>
+</ol>
+
+>**Answer: C**
+>
+>Partitioned tables include a pseudo column named _PARTITIONTIME that contains a date-based timestamp for data loaded into the table. To limit a query to particular partitions (such as Jan 1st and 2nd of 2017), use a clause similar to this:
+>WHERE _PARTITIONTIME BETWEEN TIMESTAMP('2017-01-01') AND TIMESTAMP('2017-01-02')
